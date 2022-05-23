@@ -1,36 +1,39 @@
-class LinkedListNode<Type> {
-    previous: LinkedListNode<Type> = null
-    next: LinkedListNode<Type> = null
-    element: Type = null
+class LinkedListNode {
+    previous: LinkedListNode
+    next: LinkedListNode
+    element = null
+
+    constructor(previous: LinkedListNode, next: LinkedListNode, element) {
+        this.previous = previous
+        this.next = next
+        this.element = element
+    }
 }
 
-class DoublyLinkedList<Type>{
+class DoublyLinkedList {
+    private first: LinkedListNode
+    private last: LinkedListNode
 
-    readonly first: LinkedListNode<Type>
-    readonly last: LinkedListNode<Type>
+    constructor(firstElement: any) {
+    }
 
-    addFirst(element: Type): void {
+    addFirst(element): void {
 
     }
 
-    addLast(element: Type): void {
+    addLast(element): void {
 
     }
 
-    removeFirst(): Type {
+    removeFirst() {
         return null
     }
 
-    removeLast(): Type {
+    removeLast() {
         return null
     }
 
-    get(index: number): Type {
+    get(index: number) {
         return null
-
-
-
     }
-
-
 }
