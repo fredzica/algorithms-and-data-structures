@@ -1,28 +1,26 @@
-class LinkedListNode {
-    previous: LinkedListNode
-    next: LinkedListNode
-    element = null
-
-    constructor(previous: LinkedListNode, next: LinkedListNode, element) {
-        this.previous = previous
-        this.next = next
-        this.element = element
-    }
+class LinkedListNode<Type> {
+    previous?: LinkedListNode<Type>
+    next?: LinkedListNode<Type>
+    element?: Type
 }
 
-class DoublyLinkedList {
-    private first: LinkedListNode
-    private last: LinkedListNode
+export class DoublyLinkedList<Type> {
+    private first!: LinkedListNode<Type>
+    private last!: LinkedListNode<Type>
+    private length = 0
 
-    constructor(firstElement: any) {
+    constructor() {
+        const first = new LinkedListNode<Type>()
+        const last = new LinkedListNode<Type>()
+
+        last.previous = first
+        first.next = last
     }
 
-    addFirst(element): void {
-
+    addFirst(element: Type): void {
     }
 
-    addLast(element): void {
-
+    addLast(element: Type): void {
     }
 
     removeFirst() {
