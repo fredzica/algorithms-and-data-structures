@@ -35,7 +35,7 @@ describe("Linked list tests", () => {
 
         expect(ll.removeFirst()).toEqual(first)
         expect(ll.removeFirst()).toEqual(second)
-        expect(ll.removeFirst()).toBeNull()
+        expect(ll.removeFirst()).toBeUndefined()
     })
 
     it("Should remove a last element", () => {
@@ -48,7 +48,7 @@ describe("Linked list tests", () => {
 
         expect(ll.removeLast()).toEqual(second)
         expect(ll.removeLast()).toEqual(first)
-        expect(ll.removeLast()).toBeNull()
+        expect(ll.removeLast()).toBeUndefined()
     })
 
     it("Should retrieve elements by their indexes", () => {

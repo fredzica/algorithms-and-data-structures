@@ -5,8 +5,8 @@ class LinkedListNode<Type> {
 }
 
 export class DoublyLinkedList<Type> implements IterableIterator<Type> {
-    private first!: LinkedListNode<Type>
-    private last!: LinkedListNode<Type>
+    private first: LinkedListNode<Type> | undefined
+    private last: LinkedListNode<Type> | undefined
     private length = 0
 
     private pointer = 0
@@ -33,7 +33,7 @@ export class DoublyLinkedList<Type> implements IterableIterator<Type> {
         const newFirst = new LinkedListNode<Type>()
         newFirst.element = element
 
-        if (this.first == undefined) {
+        if (this.first === undefined) {
             this.first = newFirst
             this.last = newFirst
         } else {
@@ -50,7 +50,7 @@ export class DoublyLinkedList<Type> implements IterableIterator<Type> {
         const newLast = new LinkedListNode<Type>()
         newLast.element = element
 
-        if (this.last == undefined) {
+        if (this.last === undefined) {
             this.last = newLast
             this.first = newLast
         } else {
@@ -64,7 +64,25 @@ export class DoublyLinkedList<Type> implements IterableIterator<Type> {
     }
 
     removeFirst() {
-        return null
+        if (this.length === 0) {
+            return undefined
+        }
+
+        const oldFirst = this.first
+        if (this.length === 1) {
+            this.first = undefined
+            this.last = undefined
+        } else if (this.length > 1) {
+            const newFirst = this.first?.next
+
+            if (newFirst !== undefined) {
+                newFirst.previous = undefined
+                this.first = newFirst
+            }
+        }
+
+        this.length--
+        return oldFirst?.element
     }
 
     removeLast() {
@@ -77,7 +95,7 @@ export class DoublyLinkedList<Type> implements IterableIterator<Type> {
         }
 
         let current = this.first;
-        for (let i = 0; i < index && current.next !== undefined; i++) {
+        for (let i = 0; i < index && current?.next !== undefined; i++) {
             current = current.next;
         }
 
