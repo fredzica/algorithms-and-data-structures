@@ -4,10 +4,12 @@ class LinkedListNode<Type> {
     element?: Type
 }
 
-export class DoublyLinkedList<Type> {
+export class DoublyLinkedList<Type> implements IterableIterator<Type> {
     private first!: LinkedListNode<Type>
     private last!: LinkedListNode<Type>
     private length = 0
+
+    private pointer = 0
 
     constructor() {
         const first = new LinkedListNode<Type>()
@@ -15,6 +17,24 @@ export class DoublyLinkedList<Type> {
 
         last.previous = first
         first.next = last
+    }
+
+    public next(): IteratorResult<Type> {
+        if (this.pointer < this.length) {
+            return {
+                done: true,
+                value: null
+            }
+        } else {
+            return {
+                done: true,
+                value: null
+            }
+        }
+    }
+
+    [Symbol.iterator](): IterableIterator<Type> {
+        return this
     }
 
     addFirst(element: Type): void {

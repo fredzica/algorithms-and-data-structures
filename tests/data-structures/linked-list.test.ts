@@ -52,16 +52,34 @@ describe("Linked list tests", () => {
     })
 
     it("Should retrieve elements by their indexes", () => {
-        const ll = new DoublyLinkedList<number>()
-
         const elements = Array.from(Array(10).keys())
 
+        const ll = new DoublyLinkedList<number>()
         for (const element of elements) {
             ll.addLast(element)
         }
 
         for (const element of elements) {
             expect(ll.get(element)).toEqual(element)
+        }
+    })
+
+    it("Should be iterable", () => {
+        const elements = Array.from(Array(10).keys())
+
+        const ll = new DoublyLinkedList<number>()
+        for (const element of elements) {
+            ll.addLast(element)
+        }
+
+        const iteratorResult = ll.next()
+        expect(iteratorResult.done).toEqual(false)
+        expect(iteratorResult.value).toEqual(1)
+
+        let i = 1;
+        for (const element of ll) {
+            expect(ll.get(i)).toEqual(element)
+            i++
         }
     })
 })
