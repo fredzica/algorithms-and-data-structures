@@ -63,7 +63,7 @@ export class DoublyLinkedList<Type> implements IterableIterator<Type> {
         this.length++
     }
 
-    removeFirst() {
+    removeFirst(): Type | undefined {
         if (this.length === 0) {
             return undefined
         }
@@ -85,8 +85,26 @@ export class DoublyLinkedList<Type> implements IterableIterator<Type> {
         return oldFirst?.element
     }
 
-    removeLast() {
-        return null
+    removeLast(): Type | undefined {
+        if (this.length === 0) {
+            return undefined
+        }
+
+        const oldLast = this.last
+        if (this.length === 1) {
+            this.first = undefined
+            this.last = undefined
+        } else if (this.length > 1) {
+            const newLast = this.last?.previous
+
+            if (newLast !== undefined) {
+                newLast.next = undefined
+                this.last = newLast
+            }
+        }
+
+        this.length--
+        return oldLast?.element
     }
 
     get(index: number) {
