@@ -35,7 +35,7 @@ describe("Linked list tests", () => {
 
         expect(ll.removeFirst()).toEqual(first)
         expect(ll.removeFirst()).toEqual(second)
-        expect(ll.removeFirst()).toBeUndefined()
+        expect(ll.removeFirst()).toBeNull()
     })
 
     it("Should remove a last element", () => {
@@ -48,7 +48,7 @@ describe("Linked list tests", () => {
 
         expect(ll.removeLast()).toEqual(second)
         expect(ll.removeLast()).toEqual(first)
-        expect(ll.removeLast()).toBeUndefined()
+        expect(ll.removeLast()).toBeNull()
     })
 
     it("Should retrieve elements by their indexes", () => {
@@ -74,12 +74,13 @@ describe("Linked list tests", () => {
 
         const iteratorResult = ll.next()
         expect(iteratorResult.done).toEqual(false)
-        expect(iteratorResult.value).toEqual(1)
+        expect(iteratorResult.value).toEqual(0)
 
         let i = 1;
         for (const element of ll) {
             expect(ll.get(i)).toEqual(element)
             i++
         }
+
     })
 })
