@@ -62,6 +62,10 @@ describe("Linked list tests", () => {
         for (const element of elements) {
             expect(ll.get(element)).toEqual(element)
         }
+
+        expect(ll.get(20)).toBeNull()
+        expect(new DoublyLinkedList().get(0)).toBeNull()
+
     })
 
     it("Should be iterable", () => {
@@ -72,15 +76,16 @@ describe("Linked list tests", () => {
             ll.addLast(element)
         }
 
-        const iteratorResult = ll.next()
-        expect(iteratorResult.done).toEqual(false)
-        expect(iteratorResult.value).toEqual(0)
-
-        let i = 1;
+        let i = 0;
         for (const element of ll) {
             expect(ll.get(i)).toEqual(element)
             i++
         }
 
+        i = 0;
+        for (const element of ll) {
+            expect(ll.get(i)).toEqual(element)
+            i++
+        }
     })
 })

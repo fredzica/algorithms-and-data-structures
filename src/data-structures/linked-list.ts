@@ -21,8 +21,15 @@ export class DoublyLinkedList<Type> implements IterableIterator<Type> {
             this.itCurrent = this.itCurrent.next
 
             this.itCounter++
+
+            const done = !this.itCurrent
+            if (done) {
+                this.itCounter = 0
+                this.itCurrent = undefined
+            }
+
             return {
-                done: !this.itCurrent,
+                done,
                 value: element
             }
         } else {
