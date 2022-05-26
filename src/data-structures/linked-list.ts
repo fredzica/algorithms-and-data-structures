@@ -1,17 +1,17 @@
-class LinkedListNode<T> {
-    previous?: LinkedListNode<T>
-    next?: LinkedListNode<T>
-    element!: T
-}
+class Node<T> {
+    previous?: Node<T>
+    next?: Node<T>
 
+    constructor(public element: T) { }
+}
 
 export class DoublyLinkedList<T> implements IterableIterator<T> {
     public length = 0
 
-    private first?: LinkedListNode<T>
-    private last?: LinkedListNode<T>
+    private first?: Node<T>
+    private last?: Node<T>
 
-    private itCurrent?: LinkedListNode<T>
+    private itCurrent?: Node<T>
     private itCounter = 0
 
     next(): IteratorResult<T> {
@@ -52,8 +52,7 @@ export class DoublyLinkedList<T> implements IterableIterator<T> {
     }
 
     addFirst(element: T): void {
-        const newFirst = new LinkedListNode<T>()
-        newFirst.element = element
+        const newFirst = new Node(element)
 
         if (!this.first) {
             this.first = newFirst
@@ -69,8 +68,7 @@ export class DoublyLinkedList<T> implements IterableIterator<T> {
     }
 
     addLast(element: T): void {
-        const newLast = new LinkedListNode<T>()
-        newLast.element = element
+        const newLast = new Node(element)
 
         if (!this.last) {
             this.last = newLast
