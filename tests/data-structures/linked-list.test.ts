@@ -72,6 +72,12 @@ describe("Linked list tests", () => {
         const elements = Array.from(Array(10).keys())
 
         const ll = new DoublyLinkedList<number>()
+        for (const element of ll) {
+            console.log(element)
+            // iterating an empty list
+        }
+
+
         for (const element of elements) {
             ll.addLast(element)
         }
@@ -82,6 +88,7 @@ describe("Linked list tests", () => {
             i++
         }
 
+        // ensure the same object is iterable again
         i = 0;
         for (const element of ll) {
             expect(ll.get(i)).toEqual(element)
