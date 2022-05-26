@@ -79,7 +79,7 @@ export class DoublyLinkedList<Type> implements IterableIterator<Type> {
     }
 
     removeFirst(): Type | null {
-        if (this.length === 0) {
+        if (!this.first) {
             return null
         }
 
@@ -88,7 +88,7 @@ export class DoublyLinkedList<Type> implements IterableIterator<Type> {
             this.first = undefined
             this.last = undefined
         } else if (this.length > 1) {
-            const newFirst = this.first?.next
+            const newFirst = this.first.next
 
             if (newFirst) {
                 newFirst.previous = undefined
@@ -97,11 +97,11 @@ export class DoublyLinkedList<Type> implements IterableIterator<Type> {
         }
 
         this.length--
-        return oldFirst?.element ?? null
+        return oldFirst.element
     }
 
     removeLast(): Type | null {
-        if (this.length === 0) {
+        if (!this.last) {
             return null
         }
 
@@ -110,7 +110,7 @@ export class DoublyLinkedList<Type> implements IterableIterator<Type> {
             this.first = undefined
             this.last = undefined
         } else if (this.length > 1) {
-            const newLast = this.last?.previous
+            const newLast = this.last.previous
 
             if (newLast) {
                 newLast.next = undefined
@@ -119,19 +119,19 @@ export class DoublyLinkedList<Type> implements IterableIterator<Type> {
         }
 
         this.length--
-        return oldLast?.element ?? null
+        return oldLast.element
     }
 
     get(index: number): Type | null {
-        if (index > this.length - 1) {
+        if (index > this.length - 1 || !this.first) {
             return null
         }
 
         let current = this.first;
-        for (let i = 0; i < index && current?.next; i++) {
+        for (let i = 0; i < index && current.next; i++) {
             current = current.next;
         }
 
-        return current?.element ?? null
+        return current.element
     }
 }
