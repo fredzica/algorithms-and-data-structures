@@ -1,20 +1,20 @@
-class LinkedListNode<Type> {
-    previous?: LinkedListNode<Type>
-    next?: LinkedListNode<Type>
-    element!: Type
+class LinkedListNode<T> {
+    previous?: LinkedListNode<T>
+    next?: LinkedListNode<T>
+    element!: T
 }
 
 
-export class DoublyLinkedList<Type> implements IterableIterator<Type> {
+export class DoublyLinkedList<T> implements IterableIterator<T> {
     public length = 0
 
-    private first?: LinkedListNode<Type>
-    private last?: LinkedListNode<Type>
+    private first?: LinkedListNode<T>
+    private last?: LinkedListNode<T>
 
-    private itCurrent?: LinkedListNode<Type>
+    private itCurrent?: LinkedListNode<T>
     private itCounter = 0
 
-    next(): IteratorResult<Type> {
+    next(): IteratorResult<T> {
         if (!this.first) {
             return {
                 done: true,
@@ -47,12 +47,12 @@ export class DoublyLinkedList<Type> implements IterableIterator<Type> {
         }
     }
 
-    [Symbol.iterator](): IterableIterator<Type> {
+    [Symbol.iterator](): IterableIterator<T> {
         return this
     }
 
-    addFirst(element: Type): void {
-        const newFirst = new LinkedListNode<Type>()
+    addFirst(element: T): void {
+        const newFirst = new LinkedListNode<T>()
         newFirst.element = element
 
         if (!this.first) {
@@ -68,8 +68,8 @@ export class DoublyLinkedList<Type> implements IterableIterator<Type> {
         this.length++
     }
 
-    addLast(element: Type): void {
-        const newLast = new LinkedListNode<Type>()
+    addLast(element: T): void {
+        const newLast = new LinkedListNode<T>()
         newLast.element = element
 
         if (!this.last) {
@@ -85,7 +85,7 @@ export class DoublyLinkedList<Type> implements IterableIterator<Type> {
         this.length++
     }
 
-    removeFirst(): Type | null {
+    removeFirst(): T | null {
         if (!this.first) {
             return null
         }
@@ -107,7 +107,7 @@ export class DoublyLinkedList<Type> implements IterableIterator<Type> {
         return oldFirst.element
     }
 
-    removeLast(): Type | null {
+    removeLast(): T | null {
         if (!this.last) {
             return null
         }
@@ -129,7 +129,7 @@ export class DoublyLinkedList<Type> implements IterableIterator<Type> {
         return oldLast.element
     }
 
-    get(index: number): Type | null {
+    get(index: number): T | null {
         if (index > this.length - 1 || !this.first) {
             return null
         }
