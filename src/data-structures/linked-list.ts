@@ -4,39 +4,46 @@ class LinkedListNode<Type> {
     element!: Type
 }
 
+
 export class DoublyLinkedList<Type> implements IterableIterator<Type> {
+    public length = 0
+
     private first?: LinkedListNode<Type>
     private last?: LinkedListNode<Type>
-    private length = 0
 
-    private itCounter = 0
     private itCurrent?: LinkedListNode<Type>
+    private itCounter = 0
 
     next(): IteratorResult<Type> {
-        if (this.itCounter < this.length && this.first) {
-            if (!this.itCurrent) {
-                this.itCurrent = this.first
-            }
-            const element = this.itCurrent.element
-            this.itCurrent = this.itCurrent.next
-
-            this.itCounter++
-
-            const done = !this.itCurrent
-            if (done) {
-                this.itCounter = 0
-                this.itCurrent = undefined
-            }
-
-            return {
-                done,
-                value: element
-            }
-        } else {
+        if (!this.first) {
             return {
                 done: true,
                 value: null
             }
+        }
+
+        const done = this.itCounter === this.length
+        if (done) {
+            this.itCounter = 0
+            this.itCurrent = undefined
+
+            return {
+                done: true,
+                value: null
+            }
+        }
+
+        if (!this.itCurrent) {
+            this.itCurrent = this.first
+        }
+
+        const element = this.itCurrent.element
+        this.itCurrent = this.itCurrent.next
+        this.itCounter++
+
+        return {
+            done,
+            value: element
         }
     }
 

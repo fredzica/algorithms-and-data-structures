@@ -77,7 +77,6 @@ describe("Linked list tests", () => {
             // iterating an empty list
         }
 
-
         for (const element of elements) {
             ll.addLast(element)
         }
@@ -87,6 +86,7 @@ describe("Linked list tests", () => {
             expect(ll.get(i)).toEqual(element)
             i++
         }
+        expect(i).toEqual(ll.length)
 
         // ensure the same object is iterable again
         i = 0;
@@ -94,5 +94,6 @@ describe("Linked list tests", () => {
             expect(ll.get(i)).toEqual(element)
             i++
         }
+        expect(i).toEqual(ll.length)
     })
 })
