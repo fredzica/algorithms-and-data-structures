@@ -28,6 +28,6 @@ export class Queue<T> {
     }
 
     isEmpty(): boolean {
-        return true
+        return !this.newest
     }
 }
