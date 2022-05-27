@@ -20,7 +20,14 @@ export class Queue<T> {
     }
 
     remove(): T | undefined {
-        return undefined
+        const elem = this.oldest?.element
+        this.oldest = this.oldest?.previous
+
+        if (!this.oldest) {
+            this.newest = undefined
+        }
+
+        return elem
     }
 
     peek(): T | undefined {
