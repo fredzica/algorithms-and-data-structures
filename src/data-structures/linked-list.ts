@@ -14,43 +14,6 @@ export class DoublyLinkedList<T> implements IterableIterator<T> {
     private itCurrent?: Node<T>
     private itCounter = 0
 
-    next(): IteratorResult<T> {
-        if (!this.first) {
-            return {
-                done: true,
-                value: null
-            }
-        }
-
-        const done = this.itCounter === this.length
-        if (done) {
-            this.itCounter = 0
-            this.itCurrent = undefined
-
-            return {
-                done: true,
-                value: null
-            }
-        }
-
-        if (!this.itCurrent) {
-            this.itCurrent = this.first
-        }
-
-        const element = this.itCurrent.element
-        this.itCurrent = this.itCurrent.next
-        this.itCounter++
-
-        return {
-            done,
-            value: element
-        }
-    }
-
-    [Symbol.iterator](): IterableIterator<T> {
-        return this
-    }
-
     addFirst(element: T): void {
         const newFirst = new Node(element)
 
@@ -138,5 +101,42 @@ export class DoublyLinkedList<T> implements IterableIterator<T> {
         }
 
         return current.element
+    }
+
+    next(): IteratorResult<T> {
+        if (!this.first) {
+            return {
+                done: true,
+                value: null
+            }
+        }
+
+        const done = this.itCounter === this.length
+        if (done) {
+            this.itCounter = 0
+            this.itCurrent = undefined
+
+            return {
+                done: true,
+                value: null
+            }
+        }
+
+        if (!this.itCurrent) {
+            this.itCurrent = this.first
+        }
+
+        const element = this.itCurrent.element
+        this.itCurrent = this.itCurrent.next
+        this.itCounter++
+
+        return {
+            done,
+            value: element
+        }
+    }
+
+    [Symbol.iterator](): IterableIterator<T> {
+        return this
     }
 }

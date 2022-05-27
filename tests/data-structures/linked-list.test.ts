@@ -73,8 +73,8 @@ describe("Linked list tests", () => {
 
         const ll = new DoublyLinkedList<number>()
         for (const element of ll) {
-            console.log(element)
             // iterating an empty list
+            fail(element)
         }
 
         for (const element of elements) {
