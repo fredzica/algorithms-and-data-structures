@@ -4,11 +4,12 @@ describe("Queue tests", () => {
     it("Should add an element", () => {
         const q = new Queue<string>()
 
-        q.add("hello")
-        expect(q.peek()).toEqual("hello")
+        const added = "hello"
+        q.add(added)
+        expect(q.peek()).toEqual(added)
 
         q.add("world")
-        expect(q.peek()).toEqual("world")
+        expect(q.peek()).toEqual(added)
     })
 
     it("Should remove an element", () => {
@@ -19,8 +20,8 @@ describe("Queue tests", () => {
         q.add("hello")
         q.add("world")
 
-        expect(q.remove()).toEqual("world")
         expect(q.remove()).toEqual("hello")
+        expect(q.remove()).toEqual("world")
         expect(q.remove()).toBeUndefined()
     })
 
@@ -29,11 +30,12 @@ describe("Queue tests", () => {
 
         expect(q.peek()).toBeUndefined()
 
-        q.add("hello")
-        expect(q.peek()).toEqual("hello")
+        const added = "hello"
+        q.add(added)
+        expect(q.peek()).toEqual(added)
 
         q.add("world")
-        expect(q.peek()).toEqual("world")
+        expect(q.peek()).toEqual(added)
     })
 
     it("Should correctly return if it's empty", () => {
