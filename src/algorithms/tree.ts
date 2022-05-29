@@ -1,6 +1,6 @@
 import { BinaryTreeNode } from "../data-structures/tree"
 
-const inOrderTraversal = (node: BinaryTreeNode, visit: (node: BinaryTreeNode) => void) => {
+const inOrderTraversal = <T>(node: BinaryTreeNode<T>, visit: (node: BinaryTreeNode<T>) => void) => {
     if (node.left) {
         inOrderTraversal(node.left, visit)
     }
@@ -10,7 +10,7 @@ const inOrderTraversal = (node: BinaryTreeNode, visit: (node: BinaryTreeNode) =>
     }
 }
 
-const preOrderTraversal = (node: BinaryTreeNode, visit: (node: BinaryTreeNode) => void) => {
+const preOrderTraversal = <T>(node: BinaryTreeNode<T>, visit: (node: BinaryTreeNode<T>) => void) => {
     visit(node)
     if (node.left) {
         preOrderTraversal(node.left, visit)
@@ -20,7 +20,7 @@ const preOrderTraversal = (node: BinaryTreeNode, visit: (node: BinaryTreeNode) =
     }
 }
 
-const postOrderTraversal = (node: BinaryTreeNode, visit: (node: BinaryTreeNode) => void) => {
+const postOrderTraversal = <T>(node: BinaryTreeNode<T>, visit: (node: BinaryTreeNode<T>) => void) => {
     if (node.left) {
         postOrderTraversal(node.left, visit)
     }

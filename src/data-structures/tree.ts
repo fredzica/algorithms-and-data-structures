@@ -1,7 +1,7 @@
-export class BinaryTreeNode {
+export class BinaryTreeNode<T> {
     constructor(
-        public name: string,
-        public left?: BinaryTreeNode,
-        public right?: BinaryTreeNode
+        public element: T,
+        public left?: BinaryTreeNode<T>,
+        public right?: BinaryTreeNode<T>
     ) { }
 }

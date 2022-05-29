@@ -11,6 +11,6 @@ describe("Tree algorithms tests", () => {
             new BinaryTreeNode("4")
         )
 
-        inOrderTraversal(root, (node: BinaryTreeNode) => console.log(node.name))
+        inOrderTraversal(root, (node) => console.log(node.element))
     })
 })
