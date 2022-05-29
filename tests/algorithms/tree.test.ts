@@ -4,7 +4,6 @@ import { inOrderTraversal, postOrderTraversal, preOrderTraversal } from "../../s
 
 describe("Tree algorithms tests", () => {
     const testTraversal = <T>(expectedElements: T[], node: BinaryTreeNode<T>) => {
-        console.log(node.element)
         expect(expectedElements.shift()).toEqual(node.element)
     }
 
@@ -32,12 +31,12 @@ describe("Tree algorithms tests", () => {
     })
 
     it("Should traverse a tree pre order", () => {
-        const expectedElements = [2, 1, 3, 0, 4]
+        const expectedElements = [0, 1, 2, 3, 4, 5, 6, 7]
         preOrderTraversal(root, (node) => testTraversal(expectedElements, node))
     })
 
     it("Should traverse a tree post order", () => {
-        const expectedElements = [2, 1, 3, 0, 4]
+        const expectedElements = [2, 4, 5, 3, 1, 7, 6, 0]
         postOrderTraversal(root, (node) => testTraversal(expectedElements, node))
     })
 })
