@@ -4,7 +4,7 @@
   "description": "Algorithms and data structures in Typescript.",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage  --coverageDirectory='coverage'",
+    "test": "jest --coverage  --coverageDirectory='coverage' --coverageReporters='text' --coverageReporters='json-summary'",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "repository": {
