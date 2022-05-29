@@ -29,3 +29,9 @@ const postOrderTraversal = (node: BinaryTreeNode, visit: (node: BinaryTreeNode) 
     }
     visit(node)
 }
+
+export {
+    inOrderTraversal,
+    preOrderTraversal,
+    postOrderTraversal
+}
