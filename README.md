@@ -1,8 +1,8 @@
 # algorithms-and-data-structures
 
-Algorithms and data structures in Typescript.
+Algorithms and data structures in Typescript with 100% of unit test coverage.
 
-This will also be helpful to actually learn Typescript :)
+Typescript has been a great choice for this project so far since it's a modern and powerful language with lightweight syntax. Also, static typing is nice to have when dealing with data structures since it makes expectations explicit at compile time, rendering the code easier to reason about.
 
 # Data structures
 
@@ -14,6 +14,28 @@ When the nodes also have a pointer to the previous node, we call it a doubly lin
 
 The doubly linked list is implemented here.
 
+### Operations
+
+### Complexity
+
 Why bother with linked lists since there are already arrays? Although retrieving items from specific indexes on linked lists is O(n), deleting and inserting is O(1). Arrays sometimes need to be resized on insertion and deletes. Then a linked list can be useful in specific scenarios.
+
+## Queue
+
+### Operations
+
+### Complexity
+
+## Stack
+
+### Operations
+
+### Complexity
+
+## Tree
+
+### Operations
+
+### Complexity
 
 # Algorithms
