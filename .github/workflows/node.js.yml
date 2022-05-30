@@ -29,3 +29,11 @@ jobs:
       - run: npm run lint
       - run: npm run build --if-present
       - run: npm test
+  send-coverage:
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@v3.0.0
+        env:
+          CC_TEST_REPORTER_ID: 4e4fcf6deb88879a1c41afb7687d69cc52d4981ad4feedb474b8cebb182ed070
