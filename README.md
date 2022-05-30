@@ -1,6 +1,6 @@
 # algorithms-and-data-structures
 
-![Coverage badge][/coverage/badge.svg]
+![CI status][https://github.com/fredzica/algorithms-and-data-structures/actions/workflows/node.js.yml/badge.svg]
 
 Algorithms and data structures in Typescript with 100% of unit test coverage.
 
