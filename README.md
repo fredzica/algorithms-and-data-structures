@@ -2,7 +2,7 @@
 
 ![CI status](https://github.com/fredzica/algorithms-and-data-structures/actions/workflows/node.js.yml/badge.svg)
 
-Algorithms and data structures in Typescript with 100% of unit test coverage.
+Algorithms and data structures in Typescript with unit test coverage.
 
 Typescript has been a great choice for this project so far since it's a modern and powerful language with lightweight syntax. Also, static typing is nice to have when dealing with data structures since it makes expectations explicit at compile time, rendering the code easier to reason about.
 
