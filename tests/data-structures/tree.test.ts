@@ -1,6 +1,4 @@
-import { BinaryTreeNode } from "../../src/data-structures/tree"
-
-import { inOrderTraversal, postOrderTraversal, preOrderTraversal } from "../../src/algorithms/tree"
+import { BinaryTreeNode, inOrderTraversal, postOrderTraversal, preOrderTraversal } from "../../src/data-structures/tree"
 
 describe("Tree algorithms tests", () => {
     const testTraversal = <T>(expectedElements: T[], node: BinaryTreeNode<T>) => {
