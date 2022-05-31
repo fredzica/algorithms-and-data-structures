@@ -19,21 +19,49 @@ The doubly linked list is implemented here.
 
 ### Operations
 
+- addFirst(element: T): void
+- addLast(element: T): void
+- removeFirst(): T | null
+- removeLast(): T | null
+- get(index: number): T | null
+
 ### Complexity
 
 Why bother with linked lists since there are already arrays? Although retrieving items from specific indexes on linked lists is O(n), deleting and inserting is O(1). Arrays sometimes need to be resized on insertion and deletes. Then a linked list can be useful in specific scenarios.
 
+Retrieving can be improved if the searched index is verified to be closer to the beginning or the end of the list.
+
 ## Queue
+
+Queues enforce that data is stored with a FIFO (first in first out) policy.
+
+Queues are have 2 implementations here. One is made purely with nodes that point to each other, and the newest and oldest pointer are kept. The other is backed by a Linked List.
 
 ### Operations
 
+- add(elem: T): void
+- remove(): T | undefined
+- peek(): T | undefined
+- isEmpty(): boolean
+
 ### Complexity
+
+All operations are O(1), with the exception of peek in the linked list backed implementation which is O(n) (can be optimized).
 
 ## Stack
 
+The stack abstraction allows for placing elements and retrieving only the most recent, just as a real-world stack.
+
 ### Operations
 
+- pop(): T | undefined
+- push(elem: T): void
+- peek() : T | undefined
+- isEmpty(): boolean
+
 ### Complexity
+
+All operations are O(1).
 
 ## Tree
 
