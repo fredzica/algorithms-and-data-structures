@@ -37,9 +37,49 @@ const postOrderTraversal = <T>(node: BinaryTreeNode<T>, visit: (node: BinaryTree
     visit(node)
 }
 
+const isBinarySearchTree = <T>(node: BinaryTreeNode<T>): boolean => {
+    return false
+}
+
+const isCompleteTree = <T>(node: BinaryTreeNode<T>): boolean => {
+    return false
+}
+
+/**
+ * Checks if the tree is full, i.e., if all nodes have either zero or two child nodes.
+ * @param node The root of the tree to be checked
+ * @returns True if the tree is full. False otherwise.
+ */
+const isFullTree = <T>(node: BinaryTreeNode<T>): boolean => {
+    const isNodeFull = !!node.left === !!node.right
+
+    if (!isNodeFull) {
+        return false
+    }
+
+    if (node.left && node.right) {
+        return isFullTree(node.left) && isFullTree(node.right)
+    }
+
+    return true
+}
+
+/**
+ * Checks if the tree is full and complete.
+ * @param node The root of the tree to be checked
+ * @returns True if the tree is perfect. False otherwise.
+ */
+const isPerfectTree = <T>(node: BinaryTreeNode<T>): boolean => {
+    return isCompleteTree(node) && isFullTree(node)
+}
+
 export {
     BinaryTreeNode,
     inOrderTraversal,
     preOrderTraversal,
-    postOrderTraversal
+    postOrderTraversal,
+    isBinarySearchTree,
+    isCompleteTree,
+    isFullTree,
+    isPerfectTree
 }
