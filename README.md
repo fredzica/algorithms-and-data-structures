@@ -115,9 +115,9 @@ There are 3 orders for traversing a binary tree:
 
 - Verify if:
   is binary search
-  is complete binary
-  is full binary
-  is perfect binary
+  is complete
+  is full
+  is perfect
 
 ### Complexity
 
