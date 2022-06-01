@@ -5,6 +5,10 @@
 
 Algorithms and data structures in Typescript with unit test coverage.
 
+The implementations and concepts are for learning purposes. Reaching state-of-the-art and completeness is not the primary goal of this repository (maybe one day, who knows?). But of course suggestions and improvements are welcome.
+
+The book Cracking The Coding Interview is being used as a guide for which algorithms/data structures/concepts should be studied.
+
 Typescript has been a great choice for this project so far since it's a modern and powerful language with lightweight syntax. Also, static typing is nice to have when dealing with data structures since it makes expectations explicit at compile time, rendering the code easier to reason about.
 
 # Data structures
@@ -50,7 +54,7 @@ All operations are O(1), with the exception of peek in the linked list backed im
 
 ## Stack
 
-The stack abstraction allows for placing elements and retrieving only the most recent, just as a real-world stack.
+The stack abstraction allows for placing elements and retrieving only the most recent, just as a real-world stack. The policy here is LIFO (last in first out)
 
 ### Operations
 
@@ -65,8 +69,60 @@ All operations are O(1).
 
 ## Tree
 
+A Tree is comprised of a root node that can have children nodes. Those children nodes also can have children, and so on.
+
+A Node is called a Leaf node if it doesn't have children.
+
+### Classification
+
+#### Binary Tree
+
+Nodes in binary trees have at most 2 children. For now only the binary tree will be implemented in this project.
+
+##### Balanced
+
+A binary tree is balanced when its subtrees have the same size (or almost).
+
+##### Binary Search Tree
+
+A binary search tree implies an ordering on its elements. Every node must be greater or equal than its descendent nodes to its left and lesser than its descendent nodes to the right.
+
+##### Complete Binary Tree
+
+A binary tree is complete when all its levels (horizontal layers) are filled. Its last level may be not completely filled, but the existing nodes should be filled from the left to the right.
+
+##### Full Binary Tree
+
+A binary tree is full when all its nodes have zero or two children.
+
+##### Perfect Binary Tree
+
+A binary tree is perfect when it's both complete and full.
+
 ### Operations
 
+- insert
+- find
+- delete
+
+#### Traversals
+
+There are 3 orders for traversing a binary tree:
+
+- in order: left nodes, current node, right nodes
+- pre order: current node, left nodes, right nodes
+- post order: left nodes, right nodes, current node
+
+- Verify if:
+  is binary search
+  is complete binary
+  is full binary
+  is perfect binary
+
 ### Complexity
+
+Insert and find will be O(log n) on balanced trees. Delete...?
+
+Traversals are O(n) since they visit every node.
 
 # Algorithms
