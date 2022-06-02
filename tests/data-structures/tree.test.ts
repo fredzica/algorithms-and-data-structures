@@ -1,8 +1,8 @@
-import { BinaryTreeNode, inOrderTraversal, postOrderTraversal, preOrderTraversal } from "../../src/data-structures/tree"
+import { BinaryTreeNode, inOrderTraversal, isFullTree, postOrderTraversal, preOrderTraversal } from "../../src/data-structures/tree"
 
 describe("Tree algorithms tests", () => {
     const testTraversal = <T>(expectedElements: T[], node: BinaryTreeNode<T>) => {
-        expect(expectedElements.shift()).toEqual(node.element)
+        expect(node.element).toEqual(expectedElements.shift())
     }
 
     const traversalTestsRoot: BinaryTreeNode<number> = {
@@ -38,5 +38,39 @@ describe("Tree algorithms tests", () => {
     })
 
     it("Should check if a tree is full", () => {
+        expect(isFullTree({ element: 2 })).toBe(true)
+        expect(isFullTree({ element: 2, left: { element: 6 }, right: { element: 3 } })).toBe(true)
+        expect(isFullTree({
+            element: 2,
+            left: {
+                element: 1,
+                left: { element: 2, },
+                right: { element: 3 }
+            },
+            right: {
+                element: 4,
+                left: { element: 5, },
+                right: { element: 6 }
+            }
+        })).toBe(true)
+
+        expect(isFullTree({
+            element: 0,
+            left: {
+                element: 1,
+                left: { element: 2 },
+                right: {
+                    element: 3,
+                    left: { element: 4 },
+                    right: { element: 5 },
+                }
+            },
+            right: {
+                element: 6,
+                right: { element: 7 },
+            }
+        })).toBe(false)
+
+
     })
 })
