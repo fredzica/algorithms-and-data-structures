@@ -1,4 +1,4 @@
-import { BinaryTreeNode, inOrderTraversal, isCompleteTree, isFullTree, postOrderTraversal, preOrderTraversal } from "../../src/data-structures/tree"
+import { BinaryTreeNode, inOrderTraversal, isCompleteTree, isFullTree, isPerfectTree, postOrderTraversal, preOrderTraversal } from "../../src/data-structures/tree"
 
 import { fixtures } from "../fixtures/tree"
 
@@ -124,5 +124,14 @@ describe("Tree algorithms tests", () => {
                 },
             }
         })).toBe(false)
+    })
+
+    it("Should check if a tree is perfect", () => {
+        expect(isPerfectTree(fixtures.perfect2Levels)).toEqual(true)
+        expect(isPerfectTree(fixtures.perfect3Levels)).toEqual(true)
+        expect(isPerfectTree(fixtures.oneElement)).toEqual(true)
+
+        expect(isPerfectTree(fixtures.traversalTestsRoot)).toEqual(false)
+        expect(isPerfectTree(fixtures.onlyLeft)).toEqual(false)
     })
 })
