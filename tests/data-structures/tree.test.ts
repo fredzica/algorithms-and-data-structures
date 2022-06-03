@@ -91,6 +91,36 @@ describe("Tree algorithms tests", () => {
             }
         })).toBe(true)
         expect(isCompleteTree({ element: 2, left: { element: 6 } })).toBe(true)
+        expect(isCompleteTree({
+            element: 2,
+            left: {
+                element: 1,
+                left: {
+                    element: 4,
+                    left: {
+                        element: 8
+                    },
+                    right: {
+                        element: 9
+                    }
+                },
+                right: {
+                    element: 5,
+                    left: {
+                        element: 10
+                    }
+                }
+            },
+            right: {
+                element: 3,
+                left: {
+                    element: 6
+                },
+                right: {
+                    element: 7
+                }
+            }
+        })).toBe(true)
 
         expect(isCompleteTree({ element: 2, right: { element: 3 } })).toBe(false)
         expect(isCompleteTree({
@@ -109,7 +139,6 @@ describe("Tree algorithms tests", () => {
                 right: { element: 7 },
             }
         })).toBe(false)
-
 
         expect(isCompleteTree({
             element: 3,
@@ -133,6 +162,28 @@ describe("Tree algorithms tests", () => {
             right: {
                 element: 6,
                 right: { element: 7 },
+            }
+        })).toBe(false)
+
+
+        expect(isCompleteTree({
+            element: 2,
+            left: {
+                element: 1,
+                left: {
+                    element: 3,
+                    left: {
+                        element: 4,
+                        left: { element: 6 },
+                        right: {
+                            element: 5,
+                            right: { element: 7 }
+                        },
+                    },
+                }
+            },
+            right: {
+                element: 5,
             }
         })).toBe(false)
     })
