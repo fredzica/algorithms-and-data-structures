@@ -38,8 +38,72 @@ const isBinarySearchTree = <T>(node: BinaryTreeNode<T>): boolean => {
     return false
 }
 
+/**
+ * Recursively creates a map that contains each horizontal level of the tree.
+ * @param node The root of the tree
+ * @param map A mapping of each level and its elements, to be filled by this function
+ * @param level The current level that is being traversed
+ */
+const treeLevelsMap = <T>(node: BinaryTreeNode<T> | undefined, map: Map<number, (undefined | T)[]>, level = 0) => {
+    let levelElements = map.get(level)
+    if (!levelElements) {
+        levelElements = [node?.element]
+    } else {
+        levelElements.push(node?.element)
+    }
+    map.set(level, levelElements)
+
+    if (node?.left || node?.right) {
+        const nextLevel = level + 1
+        treeLevelsMap(node?.left, map, nextLevel)
+        treeLevelsMap(node?.right, map, nextLevel)
+    }
+}
+
+/**
+ * Checks if a tree is complete, which means all but the last level been filled
+ * If the last level is not completely filled, it should be filled from left to right
+ * @param node The root node of the tree to be checked
+ * @returns True if the tree is complete. False otherwise.
+ */
 const isCompleteTree = <T>(node: BinaryTreeNode<T>): boolean => {
-    return false
+    const treeElements: Map<number, (undefined | T)[]> = new Map()
+    treeLevelsMap(node, treeElements)
+
+    const levels: number[] = []
+    for (const key of treeElements.keys()) {
+        levels.push(key)
+    }
+
+    // last level can have trailing undefineds, but none that precedes a node value
+    const lastLevel = levels.pop()
+    if (lastLevel) {
+        const elements = treeElements.get(lastLevel)
+        if (elements) {
+            let foundUndefined = false
+            for (const element of elements) {
+                const currentIsUndefined = element === undefined
+                if (currentIsUndefined) {
+                    foundUndefined = true
+                }
+
+                if (foundUndefined && !currentIsUndefined) {
+                    return false
+                }
+            }
+        }
+    }
+
+    // the levels before the last level must not have undefineds or unproper lengths
+    for (const level of levels) {
+        const elements = treeElements.get(level)
+
+        if (elements?.includes(undefined) || elements?.length !== Math.pow(2, level)) {
+            return false
+        }
+    }
+
+    return true
 }
 
 /**
