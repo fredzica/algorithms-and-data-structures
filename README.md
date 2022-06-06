@@ -119,8 +119,6 @@ There are 3 orders for traversing a binary tree:
   is full
   is perfect
 
-print tree representation
-
 ### Complexity
 
 Insert and find will be O(log n) on balanced trees. Delete...?

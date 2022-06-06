@@ -34,8 +34,31 @@ const postOrderTraversal = <T>(node: BinaryTreeNode<T>, visit: (node: BinaryTree
     visit(node)
 }
 
+/**
+ * Checks if a tree is a binary search tree
+ * A BST has all nodes n respecting this order: descendent nodes to its left <= n < descendent nodes to its right
+ * @param node The root node of the tree to be checked
+ * @returns True if the tree is a BST. False otherwise.
+ */
 const isBinarySearchTree = <T>(node: BinaryTreeNode<T>): boolean => {
-    return false
+    const elements: T[] = []
+
+    // collecting elements
+    inOrderTraversal(node, (n) => {
+        elements.push(n.element)
+    })
+
+    // checking order
+    for (let index = 1; index < elements.length; index++) {
+        const current = elements[index];
+        const previous = elements[index - 1];
+
+        if (previous > current) {
+            return false
+        }
+    }
+
+    return true
 }
 
 /**
