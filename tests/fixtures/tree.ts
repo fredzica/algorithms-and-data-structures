@@ -61,6 +61,52 @@ export const fixtures = {
                 element: 7
             }
         }
-    }
+    },
+    bst: {
+        element: 4,
+        left: {
+            element: 2,
+            left: { element: 1, },
+            right: { element: 3 }
+        },
+        right: {
+            element: 6,
+            left: { element: 5, },
+            right: {
+                element: 7,
+                right: {
+                    element: 9,
+                    left: { element: 8 },
+                    right: {
+                        element: 10,
+                        right: { element: 11 }
+                    }
+                }
+            }
+        }
+    },
+    almostBst: {
+        element: 2,
+        left: {
+            element: 2,
+            left: { element: 1, },
+            right: { element: 3 }
+        },
+        right: {
+            element: 6,
+            left: { element: 5, },
+            right: {
+                element: 7,
+                right: {
+                    element: 9,
+                    left: { element: 8 },
+                    right: {
+                        element: 10,
+                        right: { element: 11 }
+                    }
+                }
+            }
+        }
+    },
 }
 
