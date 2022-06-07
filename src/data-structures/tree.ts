@@ -11,8 +11,29 @@ class BinarySearchTree<T> {
     this.root = { element: rootElement }
   }
 
-  insert(element: T): void {
-    return
+  /**
+   * Inserts a new element into the tree. Inserts duplicates.
+   *
+   * The complexity is O(h), where h is the heigth of the tree.
+   * @param element The element to be inserted
+   */
+  insert(element: T, node = this.root): void {
+    if (element === node.element) {
+      const newNode = { element, left: node.left }
+      node.left = newNode
+    } else if (element > node.element) {
+      if (node.right) {
+        this.insert(element, node.right)
+      } else {
+        node.right = { element }
+      }
+    } else if (element < node.element) {
+      if (node.left) {
+        this.insert(element, node.left)
+      } else {
+        node.left = { element }
+      }
+    }
   }
 
   exists(element: T): boolean {
