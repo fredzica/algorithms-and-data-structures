@@ -1,76 +1,76 @@
-import { DoublyLinkedList } from "./linked-list"
+import { DoublyLinkedList } from './linked-list'
 
 class Node<T> {
-    previous?: Node<T>
+  previous?: Node<T>
 
-    constructor(public element: T) { }
+  constructor(public element: T) {}
 }
 
 export interface Queue<T> {
-    add(elem: T): void
-    remove(): T | undefined
-    peek(): T | undefined
-    isEmpty(): boolean
+  add(elem: T): void
+  remove(): T | undefined
+  peek(): T | undefined
+  isEmpty(): boolean
 }
 
 /**
  * A Queue that relies on a LinkedList implementation
  */
 export class LinkedListQueue<T> implements Queue<T> {
-    private linkedList = new DoublyLinkedList<T>()
+  private linkedList = new DoublyLinkedList<T>()
 
-    add(elem: T) {
-        this.linkedList.addFirst(elem)
-    }
+  add(elem: T) {
+    this.linkedList.addFirst(elem)
+  }
 
-    remove() {
-        return this.linkedList.removeLast() ?? undefined
-    }
+  remove() {
+    return this.linkedList.removeLast() ?? undefined
+  }
 
-    peek() {
-        const lastIndex = this.linkedList.length - 1
-        return this.linkedList.get(lastIndex) ?? undefined
-    }
+  peek() {
+    const lastIndex = this.linkedList.length - 1
+    return this.linkedList.get(lastIndex) ?? undefined
+  }
 
-    isEmpty() {
-        return this.linkedList.length === 0
-    }
+  isEmpty() {
+    return this.linkedList.length === 0
+  }
 }
 
 /**
  * A Queue implemented from the ground up
  */
 export class PureQueue<T> implements Queue<T> {
-    private newest?: Node<T>
-    private oldest?: Node<T>
+  private newest?: Node<T>
+  private oldest?: Node<T>
 
-    add(elem: T) {
-        const newNode = new Node(elem)
-        if (!this.oldest || !this.newest) {
-            this.oldest = newNode
-        } else {
-            this.newest.previous = newNode
-        }
-
-        this.newest = newNode
+  add(elem: T) {
+    const newNode = new Node(elem)
+    if (!this.oldest || !this.newest) {
+      this.oldest = newNode
+    } else {
+      this.newest.previous = newNode
     }
 
-    remove() {
-        const elem = this.oldest?.element
-        this.oldest = this.oldest?.previous
+    this.newest = newNode
+  }
 
-        if (!this.oldest) {
-            this.newest = undefined
-        }
+  remove() {
+    const elem = this.oldest?.element
+    this.oldest = this.oldest?.previous
 
-        return elem
+    if (!this.oldest) {
+      this.newest = undefined
     }
 
-    peek() {
-        return this.oldest?.element
-    }
+    return elem
+  }
 
-    isEmpty() {
-        return !this.newest
-    }
+  peek() {
+    return this.oldest?.element
+  }
+
+  isEmpty() {
+    return !this.newest
+  }
 }

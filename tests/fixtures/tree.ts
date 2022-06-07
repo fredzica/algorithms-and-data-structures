@@ -1,112 +1,111 @@
 export const fixtures = {
-    traversalTestsRoot: {
-        element: 0,
-        left: {
-            element: 1,
-            left: { element: 2 },
-            right: {
-                element: 3,
-                left: { element: 4 },
-                right: { element: 5 },
-            }
-        },
-        right: {
-            element: 6,
-            right: { element: 7 },
-        }
+  traversalTestsRoot: {
+    element: 0,
+    left: {
+      element: 1,
+      left: { element: 2 },
+      right: {
+        element: 3,
+        left: { element: 4 },
+        right: { element: 5 },
+      },
     },
-    oneElement: { element: 2 },
-    onlyLeft: { element: 2, left: { element: 6 } },
-    onlyRight: { element: 2, right: { element: 3 } },
-    perfect2Levels: { element: 2, left: { element: 6 }, right: { element: 3 } },
-    perfect3Levels: {
-        element: 2,
-        left: {
-            element: 1,
-            left: { element: 2, },
-            right: { element: 3 }
-        },
-        right: {
-            element: 4,
-            left: { element: 5, },
-            right: { element: 6 }
-        }
+    right: {
+      element: 6,
+      right: { element: 7 },
     },
-    complete: {
-        element: 2,
-        left: {
-            element: 1,
-            left: {
-                element: 4,
-                left: {
-                    element: 8
-                },
-                right: {
-                    element: 9
-                }
-            },
-            right: {
-                element: 5,
-                left: {
-                    element: 10
-                }
-            }
-        },
-        right: {
-            element: 3,
-            left: {
-                element: 6
-            },
-            right: {
-                element: 7
-            }
-        }
+  },
+  oneElement: { element: 2 },
+  onlyLeft: { element: 2, left: { element: 6 } },
+  onlyRight: { element: 2, right: { element: 3 } },
+  perfect2Levels: { element: 2, left: { element: 6 }, right: { element: 3 } },
+  perfect3Levels: {
+    element: 2,
+    left: {
+      element: 1,
+      left: { element: 2 },
+      right: { element: 3 },
     },
-    bst: {
+    right: {
+      element: 4,
+      left: { element: 5 },
+      right: { element: 6 },
+    },
+  },
+  complete: {
+    element: 2,
+    left: {
+      element: 1,
+      left: {
         element: 4,
         left: {
-            element: 2,
-            left: { element: 1, },
-            right: { element: 3 }
+          element: 8,
         },
         right: {
-            element: 6,
-            left: { element: 5, },
-            right: {
-                element: 7,
-                right: {
-                    element: 9,
-                    left: { element: 8 },
-                    right: {
-                        element: 10,
-                        right: { element: 11 }
-                    }
-                }
-            }
-        }
-    },
-    almostBst: {
-        element: 2,
+          element: 9,
+        },
+      },
+      right: {
+        element: 5,
         left: {
-            element: 2,
-            left: { element: 1, },
-            right: { element: 3 }
+          element: 10,
         },
-        right: {
-            element: 6,
-            left: { element: 5, },
-            right: {
-                element: 7,
-                right: {
-                    element: 9,
-                    left: { element: 8 },
-                    right: {
-                        element: 10,
-                        right: { element: 11 }
-                    }
-                }
-            }
-        }
+      },
     },
+    right: {
+      element: 3,
+      left: {
+        element: 6,
+      },
+      right: {
+        element: 7,
+      },
+    },
+  },
+  bst: {
+    element: 4,
+    left: {
+      element: 2,
+      left: { element: 1 },
+      right: { element: 3 },
+    },
+    right: {
+      element: 6,
+      left: { element: 5 },
+      right: {
+        element: 7,
+        right: {
+          element: 9,
+          left: { element: 8 },
+          right: {
+            element: 10,
+            right: { element: 11 },
+          },
+        },
+      },
+    },
+  },
+  almostBst: {
+    element: 2,
+    left: {
+      element: 2,
+      left: { element: 1 },
+      right: { element: 3 },
+    },
+    right: {
+      element: 6,
+      left: { element: 5 },
+      right: {
+        element: 7,
+        right: {
+          element: 9,
+          left: { element: 8 },
+          right: {
+            element: 10,
+            right: { element: 11 },
+          },
+        },
+      },
+    },
+  },
 }
-

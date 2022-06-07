@@ -1,61 +1,70 @@
 interface BinaryTreeNode<T> {
-    element: T,
-    left?: BinaryTreeNode<T>,
-    right?: BinaryTreeNode<T>
+  element: T
+  left?: BinaryTreeNode<T>
+  right?: BinaryTreeNode<T>
 }
 
 class BinarySearchTree<T> {
-    readonly root: BinaryTreeNode<T>
+  readonly root: BinaryTreeNode<T>
 
-    constructor(public rootElement: T) {
-        this.root = { element: rootElement }
-    }
+  constructor(public rootElement: T) {
+    this.root = { element: rootElement }
+  }
 
-    insert(element: T): void {
-        return
-    }
+  insert(element: T): void {
+    return
+  }
 
-    exists(element: T): boolean {
-        return false
-    }
+  exists(element: T): boolean {
+    return false
+  }
 
-    delete(element: T): boolean {
-        return false
-    }
+  delete(element: T): boolean {
+    return false
+  }
 
-    private find(element: T): BinaryTreeNode<T> | undefined {
-        return
-    }
+  private find(element: T): BinaryTreeNode<T> | undefined {
+    return
+  }
 }
 
-const inOrderTraversal = <T>(node: BinaryTreeNode<T>, visit: (node: BinaryTreeNode<T>) => void) => {
-    if (node.left) {
-        inOrderTraversal(node.left, visit)
-    }
-    visit(node)
-    if (node.right) {
-        inOrderTraversal(node.right, visit)
-    }
+const inOrderTraversal = <T>(
+  node: BinaryTreeNode<T>,
+  visit: (node: BinaryTreeNode<T>) => void,
+) => {
+  if (node.left) {
+    inOrderTraversal(node.left, visit)
+  }
+  visit(node)
+  if (node.right) {
+    inOrderTraversal(node.right, visit)
+  }
 }
 
-const preOrderTraversal = <T>(node: BinaryTreeNode<T>, visit: (node: BinaryTreeNode<T>) => void) => {
-    visit(node)
-    if (node.left) {
-        preOrderTraversal(node.left, visit)
-    }
-    if (node.right) {
-        preOrderTraversal(node.right, visit)
-    }
+const preOrderTraversal = <T>(
+  node: BinaryTreeNode<T>,
+  visit: (node: BinaryTreeNode<T>) => void,
+) => {
+  visit(node)
+  if (node.left) {
+    preOrderTraversal(node.left, visit)
+  }
+  if (node.right) {
+    preOrderTraversal(node.right, visit)
+  }
 }
 
-const postOrderTraversal = <T>(node: BinaryTreeNode<T>, visit: (node: BinaryTreeNode<T>) => void) => {
-    if (node.left) {
-        postOrderTraversal(node.left, visit)
-    }
-    if (node.right) {
-        postOrderTraversal(node.right, visit)
-    }
-    visit(node)
+const postOrderTraversal = <T>(
+  node: BinaryTreeNode<T>,
+  visit: (node: BinaryTreeNode<T>) => void,
+) => {
+  if (node.left) {
+    postOrderTraversal(node.left, visit)
+  }
+  if (node.right) {
+    postOrderTraversal(node.right, visit)
+  }
+  visit(node)
 }
 
 /**
@@ -65,24 +74,24 @@ const postOrderTraversal = <T>(node: BinaryTreeNode<T>, visit: (node: BinaryTree
  * @returns True if the tree is a BST. False otherwise.
  */
 const isBinarySearchTree = <T>(node: BinaryTreeNode<T>): boolean => {
-    const elements: T[] = []
+  const elements: T[] = []
 
-    // collecting elements
-    inOrderTraversal(node, (n) => {
-        elements.push(n.element)
-    })
+  // collecting elements
+  inOrderTraversal(node, (n) => {
+    elements.push(n.element)
+  })
 
-    // checking order
-    for (let index = 1; index < elements.length; index++) {
-        const current = elements[index];
-        const previous = elements[index - 1];
+  // checking order
+  for (let index = 1; index < elements.length; index++) {
+    const current = elements[index]
+    const previous = elements[index - 1]
 
-        if (previous > current) {
-            return false
-        }
+    if (previous > current) {
+      return false
     }
+  }
 
-    return true
+  return true
 }
 
 /**
@@ -91,20 +100,24 @@ const isBinarySearchTree = <T>(node: BinaryTreeNode<T>): boolean => {
  * @param map A mapping of each level and its elements, to be filled by this function
  * @param level The current level that is being traversed
  */
-const treeLevelsMap = <T>(node: BinaryTreeNode<T> | undefined, map: Map<number, (undefined | T)[]>, level = 0) => {
-    let levelElements = map.get(level)
-    if (!levelElements) {
-        levelElements = [node?.element]
-    } else {
-        levelElements.push(node?.element)
-    }
-    map.set(level, levelElements)
+const treeLevelsMap = <T>(
+  node: BinaryTreeNode<T> | undefined,
+  map: Map<number, (undefined | T)[]>,
+  level = 0,
+) => {
+  let levelElements = map.get(level)
+  if (!levelElements) {
+    levelElements = [node?.element]
+  } else {
+    levelElements.push(node?.element)
+  }
+  map.set(level, levelElements)
 
-    if (node?.left || node?.right) {
-        const nextLevel = level + 1
-        treeLevelsMap(node?.left, map, nextLevel)
-        treeLevelsMap(node?.right, map, nextLevel)
-    }
+  if (node?.left || node?.right) {
+    const nextLevel = level + 1
+    treeLevelsMap(node?.left, map, nextLevel)
+    treeLevelsMap(node?.right, map, nextLevel)
+  }
 }
 
 /**
@@ -114,43 +127,46 @@ const treeLevelsMap = <T>(node: BinaryTreeNode<T> | undefined, map: Map<number, 
  * @returns True if the tree is complete. False otherwise.
  */
 const isCompleteTree = <T>(node: BinaryTreeNode<T>): boolean => {
-    const treeElements: Map<number, (undefined | T)[]> = new Map()
-    treeLevelsMap(node, treeElements)
+  const treeElements: Map<number, (undefined | T)[]> = new Map()
+  treeLevelsMap(node, treeElements)
 
-    const levels: number[] = []
-    for (const key of treeElements.keys()) {
-        levels.push(key)
-    }
+  const levels: number[] = []
+  for (const key of treeElements.keys()) {
+    levels.push(key)
+  }
 
-    // last level can have trailing undefineds, but none that precedes a node value
-    const lastLevel = levels.pop()
-    if (lastLevel) {
-        const elements = treeElements.get(lastLevel)
-        if (elements) {
-            let foundUndefined = false
-            for (const element of elements) {
-                const currentIsUndefined = element === undefined
-                if (currentIsUndefined) {
-                    foundUndefined = true
-                }
-
-                if (foundUndefined && !currentIsUndefined) {
-                    return false
-                }
-            }
+  // last level can have trailing undefineds, but none that precedes a node value
+  const lastLevel = levels.pop()
+  if (lastLevel) {
+    const elements = treeElements.get(lastLevel)
+    if (elements) {
+      let foundUndefined = false
+      for (const element of elements) {
+        const currentIsUndefined = element === undefined
+        if (currentIsUndefined) {
+          foundUndefined = true
         }
-    }
 
-    // the levels before the last level must not have undefineds or unproper lengths
-    for (const level of levels) {
-        const elements = treeElements.get(level)
-
-        if (elements?.includes(undefined) || elements?.length !== Math.pow(2, level)) {
-            return false
+        if (foundUndefined && !currentIsUndefined) {
+          return false
         }
+      }
     }
+  }
 
-    return true
+  // the levels before the last level must not have undefineds or unproper lengths
+  for (const level of levels) {
+    const elements = treeElements.get(level)
+
+    if (
+      elements?.includes(undefined) ||
+      elements?.length !== Math.pow(2, level)
+    ) {
+      return false
+    }
+  }
+
+  return true
 }
 
 /**
@@ -159,17 +175,17 @@ const isCompleteTree = <T>(node: BinaryTreeNode<T>): boolean => {
  * @returns True if the tree is full. False otherwise.
  */
 const isFullTree = <T>(node: BinaryTreeNode<T>): boolean => {
-    const isNodeFull = !!node.left === !!node.right
+  const isNodeFull = !!node.left === !!node.right
 
-    if (!isNodeFull) {
-        return false
-    }
+  if (!isNodeFull) {
+    return false
+  }
 
-    if (node.left && node.right) {
-        return isFullTree(node.left) && isFullTree(node.right)
-    }
+  if (node.left && node.right) {
+    return isFullTree(node.left) && isFullTree(node.right)
+  }
 
-    return true
+  return true
 }
 
 /**
@@ -178,17 +194,17 @@ const isFullTree = <T>(node: BinaryTreeNode<T>): boolean => {
  * @returns True if the tree is perfect. False otherwise.
  */
 const isPerfectTree = <T>(node: BinaryTreeNode<T>): boolean => {
-    return isCompleteTree(node) && isFullTree(node)
+  return isCompleteTree(node) && isFullTree(node)
 }
 
 export {
-    BinaryTreeNode,
-    BinarySearchTree,
-    inOrderTraversal,
-    preOrderTraversal,
-    postOrderTraversal,
-    isBinarySearchTree,
-    isCompleteTree,
-    isFullTree,
-    isPerfectTree
+  BinaryTreeNode,
+  BinarySearchTree,
+  inOrderTraversal,
+  preOrderTraversal,
+  postOrderTraversal,
+  isBinarySearchTree,
+  isCompleteTree,
+  isFullTree,
+  isPerfectTree,
 }
