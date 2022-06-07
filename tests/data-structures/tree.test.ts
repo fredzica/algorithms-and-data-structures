@@ -1,6 +1,6 @@
-import { BinaryTreeNode, inOrderTraversal, isBinarySearchTree, isCompleteTree, isFullTree, isPerfectTree, postOrderTraversal, preOrderTraversal } from "../../src/data-structures/tree"
-
+import { BinarySearchTree, BinaryTreeNode, inOrderTraversal, isBinarySearchTree, isCompleteTree, isFullTree, isPerfectTree, postOrderTraversal, preOrderTraversal } from "../../src/data-structures/tree"
 import { fixtures } from "../fixtures/tree"
+
 
 describe("Tree algorithms tests", () => {
     const testTraversal = <T>(expectedElements: T[], node: BinaryTreeNode<T>) => {
@@ -144,5 +144,22 @@ describe("Tree algorithms tests", () => {
         expect(isBinarySearchTree(fixtures.complete)).toEqual(false)
         expect(isBinarySearchTree(fixtures.onlyLeft)).toEqual(false)
         expect(isBinarySearchTree(fixtures.perfect3Levels)).toEqual(false)
+    })
+
+    it("Should properly create a binary search tree", () => {
+        const tree = new BinarySearchTree('g')
+        tree.insert('y')
+        tree.insert('t')
+        tree.insert('b')
+        tree.insert('b')
+        tree.insert('9')
+        tree.insert('o')
+        tree.insert('p')
+        tree.insert('z')
+        tree.insert('l')
+        tree.insert('a')
+        tree.insert('5')
+
+        expect(isBinarySearchTree(tree.root)).toEqual(true)
     })
 })

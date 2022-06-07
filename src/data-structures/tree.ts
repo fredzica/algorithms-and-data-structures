@@ -4,6 +4,30 @@ interface BinaryTreeNode<T> {
     right?: BinaryTreeNode<T>
 }
 
+class BinarySearchTree<T> {
+    readonly root: BinaryTreeNode<T>
+
+    constructor(public rootElement: T) {
+        this.root = { element: rootElement }
+    }
+
+    insert(element: T): void {
+        return
+    }
+
+    exists(element: T): boolean {
+        return false
+    }
+
+    delete(element: T): boolean {
+        return false
+    }
+
+    private find(element: T): BinaryTreeNode<T> | undefined {
+        return
+    }
+}
+
 const inOrderTraversal = <T>(node: BinaryTreeNode<T>, visit: (node: BinaryTreeNode<T>) => void) => {
     if (node.left) {
         inOrderTraversal(node.left, visit)
@@ -35,7 +59,7 @@ const postOrderTraversal = <T>(node: BinaryTreeNode<T>, visit: (node: BinaryTree
 }
 
 /**
- * Checks if a tree is a binary search tree
+ * Checks if a tree is a binary search tree.
  * A BST has all nodes n respecting this order: descendent nodes to its left <= n < descendent nodes to its right
  * @param node The root node of the tree to be checked
  * @returns True if the tree is a BST. False otherwise.
@@ -159,6 +183,7 @@ const isPerfectTree = <T>(node: BinaryTreeNode<T>): boolean => {
 
 export {
     BinaryTreeNode,
+    BinarySearchTree,
     inOrderTraversal,
     preOrderTraversal,
     postOrderTraversal,
