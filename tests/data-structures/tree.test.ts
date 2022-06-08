@@ -211,7 +211,7 @@ describe('Tree algorithms tests', () => {
   it('Should correctly find the minimum value in a BST subtree', () => {
     const tree = fixtures.bst
 
-    expect(tree.findSubtreeMinimum()?.element).toEqual('5')
+    expect(tree.findSubtreeMinimum()?.element).toEqual('3')
   })
 
   it('Should correctly delete elements in a BST', () => {
