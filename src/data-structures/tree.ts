@@ -5,10 +5,10 @@ interface BinaryTreeNode<T> {
 }
 
 class BinarySearchTree<T> {
-  readonly root: BinaryTreeNode<T>
+  private _root?: BinaryTreeNode<T>
 
-  constructor(rootElement: T) {
-    this.root = { element: rootElement }
+  public get root(): BinaryTreeNode<T> | undefined {
+    return this._root
   }
 
   /**
@@ -17,23 +17,13 @@ class BinarySearchTree<T> {
    * The complexity is O(h), where h is the heigth of the tree.
    * @param element The element to be inserted
    */
-  insert(element: T, node = this.root): void {
-    if (element === node.element) {
-      const newNode = { element, left: node.left }
-      node.left = newNode
-    } else if (element > node.element) {
-      if (node.right) {
-        this.insert(element, node.right)
-      } else {
-        node.right = { element }
-      }
-    } else if (element < node.element) {
-      if (node.left) {
-        this.insert(element, node.left)
-      } else {
-        node.left = { element }
-      }
+  insert(element: T): void {
+    if (!this._root) {
+      this._root = { element }
+      return
     }
+
+    this.insertRecursion(element, this._root)
   }
 
   exists(element: T): boolean {
@@ -42,6 +32,25 @@ class BinarySearchTree<T> {
 
   delete(element: T): boolean {
     return false
+  }
+
+  private insertRecursion(element: T, node: BinaryTreeNode<T>): void {
+    if (element === node.element) {
+      const newNode = { element, left: node.left }
+      node.left = newNode
+    } else if (element > node.element) {
+      if (node.right) {
+        this.insertRecursion(element, node.right)
+      } else {
+        node.right = { element }
+      }
+    } else if (element < node.element) {
+      if (node.left) {
+        this.insertRecursion(element, node.left)
+      } else {
+        node.left = { element }
+      }
+    }
   }
 
   private find(element: T): BinaryTreeNode<T> | undefined {

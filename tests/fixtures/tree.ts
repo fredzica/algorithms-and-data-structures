@@ -1,6 +1,7 @@
 import { BinarySearchTree } from '../../src/data-structures/tree'
 
-const bst = new BinarySearchTree('g')
+const bst = new BinarySearchTree()
+bst.insert('g')
 bst.insert('y')
 bst.insert('t')
 bst.insert('c')
