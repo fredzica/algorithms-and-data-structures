@@ -1,5 +1,6 @@
 interface BinaryTreeNode<T> {
   element: T
+  parent?: BinaryTreeNode<T>
   left?: BinaryTreeNode<T>
   right?: BinaryTreeNode<T>
 }
@@ -102,19 +103,19 @@ class BinarySearchTree<T> {
 
   private insertRecursion(element: T, node: BinaryTreeNode<T>): void {
     if (element === node.element) {
-      const newNode = { element, left: node.left }
+      const newNode = { element, parent: node, left: node.left }
       node.left = newNode
     } else if (element > node.element) {
       if (node.right) {
         this.insertRecursion(element, node.right)
       } else {
-        node.right = { element }
+        node.right = { element, parent: node }
       }
     } else if (element < node.element) {
       if (node.left) {
         this.insertRecursion(element, node.left)
       } else {
-        node.left = { element }
+        node.left = { element, parent: node }
       }
     }
   }
