@@ -26,6 +26,12 @@ class BinarySearchTree<T> {
     this.insertRecursion(element, this._root)
   }
 
+  /**
+   * Checks if an element exists on the tree.
+   *
+   * The complexity is O(h), where h is the heigth of the tree.
+   * @param element The element to be checked
+   */
   exists(element: T): boolean {
     return !!this.find(element)
   }
