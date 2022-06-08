@@ -157,9 +157,10 @@ describe('Tree algorithms tests', () => {
 
   it("Should check if it's a binary search tree", () => {
     expect(isBinarySearchTree(fixtures.oneElement)).toEqual(true)
-    if (fixtures.bst.root) {
-      expect(isBinarySearchTree(fixtures.bst.root)).toEqual(true)
+    if (!fixtures.bst.root) {
+      fail()
     }
+    expect(isBinarySearchTree(fixtures.bst.root)).toEqual(true)
 
     expect(isBinarySearchTree(fixtures.almostBst)).toEqual(false)
     expect(isBinarySearchTree(fixtures.traversalTestsRoot)).toEqual(false)
@@ -184,9 +185,10 @@ describe('Tree algorithms tests', () => {
     bst.insert('a')
     bst.insert('5')
 
-    if (bst.root) {
-      expect(isBinarySearchTree(bst.root)).toEqual(true)
+    if (!bst.root) {
+      fail('bst.root should be present')
     }
+    expect(isBinarySearchTree(bst.root)).toEqual(true)
   })
 
   it('Should correctly search for elements in a BST', () => {
@@ -210,5 +212,31 @@ describe('Tree algorithms tests', () => {
     const tree = fixtures.bst
 
     expect(tree.findSubtreeMinimum()?.element).toEqual('5')
+  })
+
+  it('Should correctly delete elements in a BST', () => {
+    const tree = fixtures.bst
+
+    expect(tree.delete('z')).toEqual(true)
+    expect(tree.exists('z')).toEqual(false)
+
+    expect(tree.delete('o')).toEqual(true)
+    expect(tree.exists('o')).toEqual(false)
+
+    expect(tree.delete('b')).toEqual(true)
+    expect(tree.exists('b')).toEqual(false)
+
+    expect(tree.delete('5')).toEqual(true)
+    expect(tree.exists('5')).toEqual(false)
+
+    expect(tree.delete('g')).toEqual(true)
+    expect(tree.exists('g')).toEqual(false)
+
+    expect(tree.delete('k')).toEqual(false)
+
+    if (!tree.root) {
+      fail()
+    }
+    expect(isBinarySearchTree(tree.root)).toEqual(true)
   })
 })
