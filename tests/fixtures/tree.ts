@@ -1,3 +1,19 @@
+import { BinarySearchTree } from '../../src/data-structures/tree'
+
+const bst = new BinarySearchTree('g')
+bst.insert('y')
+bst.insert('t')
+bst.insert('c')
+bst.insert('b')
+bst.insert('9')
+bst.insert('o')
+bst.insert('b')
+bst.insert('p')
+bst.insert('z')
+bst.insert('l')
+bst.insert('a')
+bst.insert('5')
+
 export const fixtures = {
   traversalTestsRoot: {
     element: 0,
@@ -62,29 +78,7 @@ export const fixtures = {
       },
     },
   },
-  bst: {
-    element: 4,
-    left: {
-      element: 2,
-      left: { element: 1 },
-      right: { element: 3 },
-    },
-    right: {
-      element: 6,
-      left: { element: 5 },
-      right: {
-        element: 7,
-        right: {
-          element: 9,
-          left: { element: 8 },
-          right: {
-            element: 10,
-            right: { element: 11 },
-          },
-        },
-      },
-    },
-  },
+  bst,
   almostBst: {
     element: 2,
     left: {

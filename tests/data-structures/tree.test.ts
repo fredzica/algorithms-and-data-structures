@@ -157,7 +157,7 @@ describe('Tree algorithms tests', () => {
 
   it("Should check if it's a binary search tree", () => {
     expect(isBinarySearchTree(fixtures.oneElement)).toEqual(true)
-    expect(isBinarySearchTree(fixtures.bst)).toEqual(true)
+    expect(isBinarySearchTree(fixtures.bst.root)).toEqual(true)
 
     expect(isBinarySearchTree(fixtures.almostBst)).toEqual(false)
     expect(isBinarySearchTree(fixtures.traversalTestsRoot)).toEqual(false)
@@ -167,20 +167,31 @@ describe('Tree algorithms tests', () => {
   })
 
   it('Should properly create a binary search tree', () => {
-    const tree = new BinarySearchTree('g')
-    tree.insert('y')
-    tree.insert('t')
-    tree.insert('c')
-    tree.insert('b')
-    tree.insert('9')
-    tree.insert('o')
-    tree.insert('b')
-    tree.insert('p')
-    tree.insert('z')
-    tree.insert('l')
-    tree.insert('a')
-    tree.insert('5')
+    const bst = new BinarySearchTree('g')
+    bst.insert('y')
+    bst.insert('t')
+    bst.insert('c')
+    bst.insert('b')
+    bst.insert('9')
+    bst.insert('o')
+    bst.insert('b')
+    bst.insert('p')
+    bst.insert('z')
+    bst.insert('l')
+    bst.insert('a')
+    bst.insert('5')
 
-    expect(isBinarySearchTree(tree.root)).toEqual(true)
+    expect(isBinarySearchTree(bst.root)).toEqual(true)
+  })
+
+  it('Should correctly search for elements in a BST', () => {
+    const tree = fixtures.bst
+
+    expect(tree.exists('z')).toEqual(true)
+    expect(tree.exists('o')).toEqual(true)
+    expect(tree.exists('5')).toEqual(true)
+
+    expect(tree.exists('i')).toEqual(false)
+    expect(tree.exists('1')).toEqual(false)
   })
 })

@@ -7,7 +7,7 @@ interface BinaryTreeNode<T> {
 class BinarySearchTree<T> {
   readonly root: BinaryTreeNode<T>
 
-  constructor(public rootElement: T) {
+  constructor(rootElement: T) {
     this.root = { element: rootElement }
   }
 
@@ -37,7 +37,7 @@ class BinarySearchTree<T> {
   }
 
   exists(element: T): boolean {
-    return false
+    return !!this.find(element)
   }
 
   delete(element: T): boolean {
@@ -45,7 +45,19 @@ class BinarySearchTree<T> {
   }
 
   private find(element: T): BinaryTreeNode<T> | undefined {
-    return
+    let current: BinaryTreeNode<T> | undefined = this.root
+
+    while (current) {
+      if (element === current.element) {
+        return current
+      } else if (element < current.element) {
+        current = current.left
+      } else if (element > current.element) {
+        current = current.right
+      }
+    }
+
+    return undefined
   }
 }
 
