@@ -37,6 +37,36 @@ class BinarySearchTree<T> {
   }
 
   delete(element: T): boolean {
+    const node = this.find(element)
+    if (!node) {
+      return false
+    }
+
+    let newNode
+    if (node.left) {
+      /* 1 - make the to-be-deleted node.element be newNode.element
+         2 - if newNode has a left subtree (it won't have a right subtree),
+             make that subtree the new newNode->parent->right
+         3 - make newNode's left and parent be undefined
+       */
+      newNode = this.findSubtreeMaximum(node.left)
+    } else if (node.right) {
+      /* 1 - make the to-be-deleted node.element be newNode.element
+         2 - if newNode has a right subtree (it won't have a left subtree),
+             make that subtree the new newNode->parent->left
+         3 - make newNode's right and parent be undefined
+       */
+      newNode = this.findSubtreeMinimum(node.right)
+    } else {
+      // removing a leaf node
+    }
+
+    if (!newNode) {
+      throw new Error('Unexpected state, newNode should be present')
+    }
+
+    node.element = newNode.element
+
     return false
   }
 
