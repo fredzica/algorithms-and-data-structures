@@ -40,6 +40,36 @@ class BinarySearchTree<T> {
     return false
   }
 
+  /**
+   * Returns the maximum value in a subtree.
+   *
+   * The complexity is O(h), where h is the heigth of the tree.
+   * @param node the root node of the subtree
+   */
+  findSubtreeMaximum(node = this._root): BinaryTreeNode<T> | undefined {
+    let current = node
+    while (current?.right) {
+      current = current.right
+    }
+
+    return current
+  }
+
+  /**
+   * Returns the minimum value in a subtree.
+   *
+   * The complexity is O(h), where h is the heigth of the tree.
+   * @param node the root node of the subtree
+   */
+  findSubtreeMinimum(node = this._root): BinaryTreeNode<T> | undefined {
+    let current = node
+    while (current?.left) {
+      current = current.left
+    }
+
+    return current
+  }
+
   private insertRecursion(element: T, node: BinaryTreeNode<T>): void {
     if (element === node.element) {
       const newNode = { element, left: node.left }

@@ -199,4 +199,16 @@ describe('Tree algorithms tests', () => {
     expect(tree.exists('i')).toEqual(false)
     expect(tree.exists('1')).toEqual(false)
   })
+
+  it('Should correctly find the maximum value in a BST subtree', () => {
+    const tree = fixtures.bst
+
+    expect(tree.findSubtreeMaximum()?.element).toEqual('z')
+  })
+
+  it('Should correctly find the minimum value in a BST subtree', () => {
+    const tree = fixtures.bst
+
+    expect(tree.findSubtreeMinimum()?.element).toEqual('5')
+  })
 })
