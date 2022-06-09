@@ -37,44 +37,76 @@ class BinarySearchTree<T> {
     return !!this.find(element)
   }
 
+  /**
+   * Deletes an element from the tree.
+   *
+   * The runtime complexity is O(h), where h is the heigth of the tree.
+   * The space complexity is O(1).
+   * @param element The element to be deleted
+   * @returns True if the element was found and was deleted. False otherwise
+   */
   delete(element: T): boolean {
     const node = this.find(element)
     if (!node) {
       return false
     }
 
-    let newNode
-    if (node.left) {
-      /* 1 - make the to-be-deleted node.element be newNode.element
-         2 - if newNode has a left subtree (it won't have a right subtree),
-             make that subtree the new newNode->parent->right
-         3 - make newNode's left and parent be undefined
-       */
-      newNode = this.findSubtreeMaximum(node.left)
-    } else if (node.right) {
-      /* 1 - make the to-be-deleted node.element be newNode.element
-         2 - if newNode has a right subtree (it won't have a left subtree),
-             make that subtree the new newNode->parent->left
-         3 - make newNode's right and parent be undefined
-       */
-      newNode = this.findSubtreeMinimum(node.right)
-    } else {
+    if (!node.left && !node.right) {
       // removing a leaf node
+      if (node === node.parent?.left) {
+        node.parent.left = undefined
+      } else if (node === node.parent?.right) {
+        node.parent.right = undefined
+      }
+      node.parent = undefined
+
+      return true
     }
 
-    if (!newNode) {
-      throw new Error('Unexpected state, newNode should be present')
+    const newNode = node.left
+      ? this.findSubtreeMaximum(node.left)
+      : this.findSubtreeMinimum(node.right)
+    if (!newNode || !newNode.parent) {
+      throw {
+        message: 'Unexpected state: could not find a subtree maximum/minimum',
+      }
     }
-
+    // make the to-be-deleted node.element be newNode.element
     node.element = newNode.element
 
-    return false
+    // if node being deleted is the newNode's parent, it's enough to make its left or right subtree bubble up
+    // otherwise, newNode's subtree must be correctly handled as below
+    if (node.left) {
+      if (newNode.left) {
+        if (newNode.parent === node) {
+          node.left = newNode.left
+        } else {
+          // if newNode has a left subtree (it won't have a right subtree)
+          newNode.parent.right = newNode.left
+          newNode.left = undefined
+        }
+      }
+    } else if (node.right) {
+      if (newNode.right) {
+        if (newNode.parent === node) {
+          node.right = newNode.right
+        } else {
+          // if newNode has a right subtree (it won't have a left subtree)
+          newNode.parent.left = newNode.right
+          newNode.right = undefined
+        }
+      }
+    }
+    newNode.parent = undefined
+
+    return true
   }
 
   /**
    * Returns the maximum value in a subtree.
    *
    * The complexity is O(h), where h is the heigth of the tree.
+   * The space complexity is O(1).
    * @param node the root node of the subtree
    */
   findSubtreeMaximum(node = this._root): BinaryTreeNode<T> | undefined {
@@ -90,6 +122,7 @@ class BinarySearchTree<T> {
    * Returns the minimum value in a subtree.
    *
    * The complexity is O(h), where h is the heigth of the tree.
+   * The space complexity is O(1).
    * @param node the root node of the subtree
    */
   findSubtreeMinimum(node = this._root): BinaryTreeNode<T> | undefined {
