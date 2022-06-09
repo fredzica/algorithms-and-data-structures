@@ -215,7 +215,26 @@ describe('Tree algorithms tests', () => {
   })
 
   it('Should correctly delete elements in a BST', () => {
-    const tree = fixtures.bst
+    const tree = new BinarySearchTree()
+    tree.insert('g')
+    tree.insert('y')
+    tree.insert('t')
+    tree.insert('c')
+    tree.insert('b')
+    tree.insert('9')
+    tree.insert('o')
+    tree.insert('n')
+    tree.insert('5')
+    tree.insert('b')
+    tree.insert('p')
+    tree.insert('z')
+    tree.insert('l')
+    tree.insert('a')
+    tree.insert('t')
+    tree.insert('3')
+    tree.insert('m')
+    tree.insert('r')
+    tree.insert('s')
 
     expect(tree.delete('z')).toEqual(true)
     expect(tree.exists('z')).toEqual(false)
@@ -224,7 +243,7 @@ describe('Tree algorithms tests', () => {
     expect(tree.exists('o')).toEqual(false)
 
     expect(tree.delete('b')).toEqual(true)
-    expect(tree.exists('b')).toEqual(false)
+    expect(tree.exists('b')).toEqual(true) // there are two b's in the bst
 
     expect(tree.delete('5')).toEqual(true)
     expect(tree.exists('5')).toEqual(false)
