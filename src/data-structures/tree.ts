@@ -46,63 +46,67 @@ class BinarySearchTree<T> {
    * @returns True if the element was found and was deleted. False otherwise
    */
   delete(element: T): boolean {
-    const toDelete = this.find(element)
-    if (!toDelete) {
+    /*
+    Cases to be handled:
+    1 - element not found
+    2 - leaf node found
+    3 - node with left subtree found
+    4 - node with only right subtree found
+
+    Cases 3 and 4 have more subcases as seen below
+    */
+
+    const toReplace = this.find(element)
+    if (!toReplace) {
       return false
     }
 
-    if (!toDelete.left && !toDelete.right) {
+    if (!toReplace.left && !toReplace.right) {
       // removing a leaf node
-      if (toDelete === toDelete.parent?.left) {
-        toDelete.parent.left = undefined
-      } else if (toDelete === toDelete.parent?.right) {
-        toDelete.parent.right = undefined
+      if (toReplace === toReplace.parent?.left) {
+        toReplace.parent.left = undefined
+      } else if (toReplace === toReplace.parent?.right) {
+        toReplace.parent.right = undefined
       }
-      toDelete.parent = undefined
+      toReplace.parent = undefined
 
       return true
     }
 
-    const newNode = toDelete.left
-      ? this.findSubtreeMaximum(toDelete.left)
-      : this.findSubtreeMinimum(toDelete.right)
-    if (!newNode || !newNode.parent) {
+    const substitute = toReplace.left
+      ? this.findSubtreeMaximum(toReplace.left)
+      : this.findSubtreeMinimum(toReplace.right)
+    if (!substitute || !substitute.parent) {
       throw {
         message: 'Unexpected state: could not find a subtree maximum/minimum',
       }
     }
-    // make the to-be-deleted node.element be newNode.element
-    toDelete.element = newNode.element
 
-    if (toDelete.left) {
-      if (newNode.left) {
-        if (newNode.parent === toDelete) {
-          toDelete.left = newNode.left
-          newNode.left.parent = toDelete
-        } else {
-          // if newNode has a left subtree (it won't have a right subtree)
-          newNode.parent.right = newNode.left
-          newNode.left.parent = newNode.parent
-          newNode.left = undefined
-        }
-      } else {
-        toDelete.left = undefined
+    toReplace.element = substitute.element
+    if (toReplace.left) {
+      if (substitute.parent === toReplace) {
+        toReplace.left = substitute.left
+      } else if (substitute.left) {
+        substitute.parent.right = substitute.left
       }
-    } else if (toDelete.right) {
-      if (newNode.right) {
-        if (newNode.parent === toDelete) {
-          toDelete.right = newNode.right
-        } else {
-          // if newNode has a right subtree (it won't have a left subtree)
-          newNode.parent.left = newNode.right
-          newNode.right.parent = newNode.parent
-          newNode.right = undefined
-        }
-      } else {
-        toDelete.right = undefined
+
+      if (substitute.left) {
+        substitute.left.parent = substitute.parent
       }
+      substitute.left = undefined
+    } else if (toReplace.right) {
+      if (substitute.parent === toReplace) {
+        toReplace.right = substitute.right
+      } else if (substitute.right) {
+        substitute.parent.left = substitute.right
+      }
+
+      if (substitute.right) {
+        substitute.right.parent = substitute.parent
+      }
+      substitute.right = undefined
     }
-    newNode.parent = undefined
+    substitute.parent = undefined
 
     return true
   }
