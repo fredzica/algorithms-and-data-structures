@@ -15,7 +15,7 @@ class BinarySearchTree<T> {
   /**
    * Inserts a new element into the tree. Inserts duplicates.
    *
-   * The complexity is O(h), where h is the heigth of the tree.
+   * The complexity is O(h), where h is the height of the tree.
    * @param element The element to be inserted
    */
   insert(element: T): void {
@@ -30,7 +30,7 @@ class BinarySearchTree<T> {
   /**
    * Checks if an element exists on the tree.
    *
-   * The complexity is O(h), where h is the heigth of the tree.
+   * The complexity is O(h), where h is the height of the tree.
    * @param element The element to be checked
    */
   exists(element: T): boolean {
@@ -40,61 +40,66 @@ class BinarySearchTree<T> {
   /**
    * Deletes an element from the tree.
    *
-   * The runtime complexity is O(h), where h is the heigth of the tree.
+   * The runtime complexity is O(h), where h is the height of the tree.
    * The space complexity is O(1).
    * @param element The element to be deleted
    * @returns True if the element was found and was deleted. False otherwise
    */
   delete(element: T): boolean {
-    const node = this.find(element)
-    if (!node) {
+    const toDelete = this.find(element)
+    if (!toDelete) {
       return false
     }
 
-    if (!node.left && !node.right) {
+    if (!toDelete.left && !toDelete.right) {
       // removing a leaf node
-      if (node === node.parent?.left) {
-        node.parent.left = undefined
-      } else if (node === node.parent?.right) {
-        node.parent.right = undefined
+      if (toDelete === toDelete.parent?.left) {
+        toDelete.parent.left = undefined
+      } else if (toDelete === toDelete.parent?.right) {
+        toDelete.parent.right = undefined
       }
-      node.parent = undefined
+      toDelete.parent = undefined
 
       return true
     }
 
-    const newNode = node.left
-      ? this.findSubtreeMaximum(node.left)
-      : this.findSubtreeMinimum(node.right)
+    const newNode = toDelete.left
+      ? this.findSubtreeMaximum(toDelete.left)
+      : this.findSubtreeMinimum(toDelete.right)
     if (!newNode || !newNode.parent) {
       throw {
         message: 'Unexpected state: could not find a subtree maximum/minimum',
       }
     }
     // make the to-be-deleted node.element be newNode.element
-    node.element = newNode.element
+    toDelete.element = newNode.element
 
-    // if node being deleted is the newNode's parent, it's enough to make its left or right subtree bubble up
-    // otherwise, newNode's subtree must be correctly handled as below
-    if (node.left) {
+    if (toDelete.left) {
       if (newNode.left) {
-        if (newNode.parent === node) {
-          node.left = newNode.left
+        if (newNode.parent === toDelete) {
+          toDelete.left = newNode.left
+          newNode.left.parent = toDelete
         } else {
           // if newNode has a left subtree (it won't have a right subtree)
           newNode.parent.right = newNode.left
+          newNode.left.parent = newNode.parent
           newNode.left = undefined
         }
+      } else {
+        toDelete.left = undefined
       }
-    } else if (node.right) {
+    } else if (toDelete.right) {
       if (newNode.right) {
-        if (newNode.parent === node) {
-          node.right = newNode.right
+        if (newNode.parent === toDelete) {
+          toDelete.right = newNode.right
         } else {
           // if newNode has a right subtree (it won't have a left subtree)
           newNode.parent.left = newNode.right
+          newNode.right.parent = newNode.parent
           newNode.right = undefined
         }
+      } else {
+        toDelete.right = undefined
       }
     }
     newNode.parent = undefined
@@ -105,7 +110,7 @@ class BinarySearchTree<T> {
   /**
    * Returns the maximum value in a subtree.
    *
-   * The complexity is O(h), where h is the heigth of the tree.
+   * The complexity is O(h), where h is the height of the tree.
    * The space complexity is O(1).
    * @param node the root node of the subtree
    */
@@ -121,7 +126,7 @@ class BinarySearchTree<T> {
   /**
    * Returns the minimum value in a subtree.
    *
-   * The complexity is O(h), where h is the heigth of the tree.
+   * The complexity is O(h), where h is the height of the tree.
    * The space complexity is O(1).
    * @param node the root node of the subtree
    */
