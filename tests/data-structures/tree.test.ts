@@ -264,4 +264,49 @@ describe('Tree algorithms tests', () => {
     }
     expect(isBinarySearchTree(tree.root)).toEqual(true)
   })
+
+  it('Should correctly delete elements until a tree is empty', () => {
+    const tree = new BinarySearchTree()
+    tree.insert(1)
+
+    expect(tree.delete(1)).toEqual(true)
+    expect(tree.exists(1)).toEqual(false)
+    expect(tree.delete(1)).toEqual(false)
+  })
+
+  it('Should correctly delete right-oriented elements in a BST', () => {
+    const tree = new BinarySearchTree()
+
+    // another structure
+    tree.insert(8)
+    tree.insert(10)
+    tree.insert(12)
+    tree.insert(20)
+    tree.insert(17)
+    tree.insert(18)
+    tree.insert(15)
+    tree.insert(16)
+    tree.insert(5)
+    tree.insert(7)
+    tree.insert(6)
+    tree.insert(2)
+    tree.insert(1)
+
+    expect(tree.delete(8)).toEqual(true)
+    expect(tree.exists(8)).toEqual(false)
+
+    expect(tree.delete(10)).toEqual(true)
+    expect(tree.exists(10)).toEqual(false)
+
+    expect(tree.delete(12)).toEqual(true)
+    expect(tree.exists(12)).toEqual(false)
+
+    expect(tree.delete(20)).toEqual(true)
+    expect(tree.exists(20)).toEqual(false)
+
+    if (!tree.root) {
+      fail()
+    }
+    expect(isBinarySearchTree(tree.root)).toEqual(true)
+  })
 })

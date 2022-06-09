@@ -70,6 +70,10 @@ class BinarySearchTree<T> {
       }
       toReplace.parent = undefined
 
+      if (toReplace === this._root) {
+        this._root = undefined
+      }
+
       return true
     }
 
