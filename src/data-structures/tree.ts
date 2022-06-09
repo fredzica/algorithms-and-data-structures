@@ -15,7 +15,9 @@ class BinarySearchTree<T> {
   /**
    * Inserts a new element into the tree. Inserts duplicates.
    *
-   * The complexity is O(h), where h is the height of the tree.
+   * The runtime complexity is O(h), where h is the height of the tree.
+   * If the tree is balanced, the runtime complexity will be O(log n)
+   * The space complexity is O(h).
    * @param element The element to be inserted
    */
   insert(element: T): void {
@@ -30,7 +32,9 @@ class BinarySearchTree<T> {
   /**
    * Checks if an element exists on the tree.
    *
-   * The complexity is O(h), where h is the height of the tree.
+   * The runtime complexity is O(h), where h is the height of the tree.
+   * If the tree is balanced, the runtime complexity will be O(log n)
+   * The space complexity is O(1).
    * @param element The element to be checked
    */
   exists(element: T): boolean {
@@ -118,7 +122,7 @@ class BinarySearchTree<T> {
   /**
    * Returns the maximum value in a subtree.
    *
-   * The complexity is O(h), where h is the height of the tree.
+   * The runtime complexity is O(h), where h is the height of the tree.
    * The space complexity is O(1).
    * @param node the root node of the subtree
    */
@@ -134,7 +138,7 @@ class BinarySearchTree<T> {
   /**
    * Returns the minimum value in a subtree.
    *
-   * The complexity is O(h), where h is the height of the tree.
+   * The runtime complexity is O(h), where h is the height of the tree.
    * The space complexity is O(1).
    * @param node the root node of the subtree
    */
@@ -147,25 +151,46 @@ class BinarySearchTree<T> {
     return current
   }
 
+  /**
+   * Does a recursion to insert a new element into a tree.
+   *
+   * The runtime complexity is O(h), where h is the height of the tree.
+   * If the tree is balanced, the runtime complexity will be O(log n)
+   * The space complexity is O(h).
+   * @param node the root node of the subtree
+   */
   private insertRecursion(element: T, node: BinaryTreeNode<T>): void {
+    let nextNode
     if (element === node.element) {
       const newNode = { element, parent: node, left: node.left }
       node.left = newNode
     } else if (element > node.element) {
       if (node.right) {
-        this.insertRecursion(element, node.right)
+        nextNode = node.right
       } else {
         node.right = { element, parent: node }
       }
     } else if (element < node.element) {
       if (node.left) {
-        this.insertRecursion(element, node.left)
+        nextNode = node.left
       } else {
         node.left = { element, parent: node }
       }
     }
+
+    if (nextNode) {
+      this.insertRecursion(element, nextNode)
+    }
   }
 
+  /**
+   * Finds the node of an element.
+   *
+   * The runtime complexity is O(h), where h is the height of the tree.
+   * If the tree is balanced, the runtime complexity will be O(log n)
+   * The space complexity is O(1).
+   * @param node the root node of the subtree
+   */
   private find(element: T): BinaryTreeNode<T> | undefined {
     let current: BinaryTreeNode<T> | undefined = this.root
 
@@ -183,6 +208,14 @@ class BinarySearchTree<T> {
   }
 }
 
+/**
+ * Traverses a tree in order: left, current, right
+ *
+ * The runtime complexity is O(n), where n is the number of nodes.
+ * The space complexity is O(n).
+ * @param node The node where the traversal will start
+ * @param visit Function that can do something with the visited node
+ */
 const inOrderTraversal = <T>(
   node: BinaryTreeNode<T>,
   visit: (node: BinaryTreeNode<T>) => void,
@@ -196,6 +229,14 @@ const inOrderTraversal = <T>(
   }
 }
 
+/**
+ * Traverses a tree in order: current, left, right
+ *
+ * The runtime complexity is O(n), where n is the number of nodes.
+ * The space complexity is O(n).
+ * @param node The node where the traversal will start
+ * @param visit Function that can do something with the visited node
+ */
 const preOrderTraversal = <T>(
   node: BinaryTreeNode<T>,
   visit: (node: BinaryTreeNode<T>) => void,
@@ -209,6 +250,14 @@ const preOrderTraversal = <T>(
   }
 }
 
+/**
+ * Traverses a tree in order: left, right, current
+ *
+ * The runtime complexity is O(n), where n is the number of nodes.
+ * The space complexity is O(n).
+ * @param node The node where the traversal will start
+ * @param visit Function that can do something with the visited node
+ */
 const postOrderTraversal = <T>(
   node: BinaryTreeNode<T>,
   visit: (node: BinaryTreeNode<T>) => void,
@@ -225,6 +274,9 @@ const postOrderTraversal = <T>(
 /**
  * Checks if a tree is a binary search tree.
  * A BST has all nodes n respecting this order: descendent nodes to its left <= n < descendent nodes to its right
+ *
+ * The runtime complexity is O(n), where n is the number of nodes.
+ * The space complexity is O(n).
  * @param node The root node of the tree to be checked
  * @returns True if the tree is a BST. False otherwise.
  */
@@ -251,6 +303,9 @@ const isBinarySearchTree = <T>(node: BinaryTreeNode<T>): boolean => {
 
 /**
  * Recursively creates a map that contains each horizontal level of the tree.
+ *
+ * The runtime complexity is O(n), where n is the number of nodes.
+ * The space complexity is O(n).
  * @param node The root of the tree
  * @param map A mapping of each level and its elements, to be filled by this function
  * @param level The current level that is being traversed
@@ -278,6 +333,9 @@ const treeLevelsMap = <T>(
 /**
  * Checks if a tree is complete, which means all but the last level been filled
  * If the last level is not completely filled, it should be filled from left to right
+ *
+ * The runtime complexity is O(n), where n is the number of nodes.
+ * The space complexity is O(n).
  * @param node The root node of the tree to be checked
  * @returns True if the tree is complete. False otherwise.
  */
@@ -326,6 +384,9 @@ const isCompleteTree = <T>(node: BinaryTreeNode<T>): boolean => {
 
 /**
  * Checks if the tree is full, i.e., if all nodes have either zero or two child nodes.
+ *
+ * The runtime complexity is O(n), where n is the number of nodes.
+ * The space complexity is O(n).
  * @param node The root of the tree to be checked
  * @returns True if the tree is full. False otherwise.
  */
@@ -345,6 +406,9 @@ const isFullTree = <T>(node: BinaryTreeNode<T>): boolean => {
 
 /**
  * Checks if the tree is full and complete.
+ *
+ * The runtime complexity is O(n), where n is the number of nodes.
+ * The space complexity is O(n).
  * @param node The root of the tree to be checked
  * @returns True if the tree is perfect. False otherwise.
  */

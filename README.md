@@ -99,12 +99,6 @@ A binary tree is full when all its nodes have zero or two children.
 
 A binary tree is perfect when it's both complete and full.
 
-### Operations
-
-- insert
-- find
-- delete
-
 #### Traversals
 
 There are 3 orders for traversing a binary tree:
@@ -112,17 +106,5 @@ There are 3 orders for traversing a binary tree:
 - in order: left nodes, current node, right nodes
 - pre order: current node, left nodes, right nodes
 - post order: left nodes, right nodes, current node
-
-- Verify if:
-  is binary search
-  is complete
-  is full
-  is perfect
-
-### Complexity
-
-Insert and find will be O(log n) on balanced trees. Delete...?
-
-Traversals are O(n) since they visit every node.
 
 # Algorithms
