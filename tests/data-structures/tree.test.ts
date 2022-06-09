@@ -229,9 +229,9 @@ describe('Tree algorithms tests', () => {
     tree.insert('p')
     tree.insert('z')
     tree.insert('l')
+    tree.insert('3')
     tree.insert('a')
     tree.insert('t')
-    tree.insert('3')
     tree.insert('m')
     tree.insert('r')
     tree.insert('s')
@@ -242,11 +242,17 @@ describe('Tree algorithms tests', () => {
     expect(tree.delete('o')).toEqual(true)
     expect(tree.exists('o')).toEqual(false)
 
+    expect(tree.delete('c')).toEqual(true)
+    expect(tree.exists('c')).toEqual(false)
+
     expect(tree.delete('b')).toEqual(true)
     expect(tree.exists('b')).toEqual(true) // there are two b's in the bst
 
     expect(tree.delete('5')).toEqual(true)
     expect(tree.exists('5')).toEqual(false)
+
+    expect(tree.delete('3')).toEqual(true)
+    expect(tree.exists('3')).toEqual(false)
 
     expect(tree.delete('g')).toEqual(true)
     expect(tree.exists('g')).toEqual(false)
