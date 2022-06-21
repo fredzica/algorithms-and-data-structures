@@ -14,6 +14,13 @@ export class DoublyLinkedList<T> implements IterableIterator<T> {
   private itCurrent?: Node<T>
   private itCounter = 0
 
+  /**
+   * Adds an element to the beginning of the linked list.
+   *
+   * The runtime complexity is O(1).
+   * The space complexity is O(1).
+   * @param element The element to be added
+   */
   addFirst(element: T): void {
     const newFirst = new Node(element)
 
@@ -30,6 +37,13 @@ export class DoublyLinkedList<T> implements IterableIterator<T> {
     this.length++
   }
 
+  /**
+   * Adds an element to the end of the linked list.
+   *
+   * The runtime complexity is O(1).
+   * The space complexity is O(1).
+   * @param element The element to be added
+   */
   addLast(element: T): void {
     const newLast = new Node(element)
 
@@ -46,6 +60,13 @@ export class DoublyLinkedList<T> implements IterableIterator<T> {
     this.length++
   }
 
+  /**
+   * Removes an element from the beginning of the linked list.
+   *
+   * The runtime complexity is O(1).
+   * The space complexity is O(1).
+   * @returns The removed element
+   */
   removeFirst(): T | null {
     if (!this.first) {
       return null
@@ -68,6 +89,13 @@ export class DoublyLinkedList<T> implements IterableIterator<T> {
     return oldFirst.element
   }
 
+  /**
+   * Removes an element from the end of the linked list.
+   *
+   * The runtime complexity is O(1).
+   * The space complexity is O(1).
+   * @returns The removed element
+   */
   removeLast(): T | null {
     if (!this.last) {
       return null
@@ -90,8 +118,15 @@ export class DoublyLinkedList<T> implements IterableIterator<T> {
     return oldLast.element
   }
 
+  /**
+   * Retrieves an element in a specific index.
+   *
+   * The runtime complexity is O(n).
+   * The space complexity is O(1).
+   * @returns The found element
+   */
   get(index: number): T | null {
-    if (index > this.length - 1 || !this.first) {
+    if (index < 0 || index > this.length - 1 || !this.first) {
       return null
     }
 
