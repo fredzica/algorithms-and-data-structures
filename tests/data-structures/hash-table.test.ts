@@ -36,4 +36,26 @@ describe('HashTable tests', () => {
 
     expect(hashTable.contains('some random string')).toEqual(false)
   })
+
+  it('Should handle a lot of entries', () => {
+    const hashTable = new HashTable<number>()
+
+    // adding entries
+    const entries: [string, number][] = []
+    for (let i = 0; i < 10000; i++) {
+      let key = i.toString() + ' '
+      key = key.repeat(5)
+
+      // getting when it wasn't inserted yet
+      expect(hashTable.get(key)).toBeUndefined()
+
+      entries.push([key, i])
+      hashTable.put(key, i)
+    }
+
+    // testing entries
+    entries.forEach((entry) => {
+      expect(hashTable.get(entry[0])).toEqual(entry[1])
+    })
+  })
 })

@@ -12,16 +12,18 @@ import { DoublyLinkedList } from './linked-list'
  * an unnecessary overhead for the purposes of this project.
  */
 export class HashTable<V> {
-  private keys: DoublyLinkedList<[string, V]>[] = []
+  private entries: DoublyLinkedList<[string, V]>[] = []
 
   get(key: string): V | undefined {
     const index = this.getArrayIndex(key)
-    const tuples = this.keys[index]
+    const tuples = this.entries[index]
 
     if (!tuples) return undefined
 
-    for (const tuple of tuples) {
-      if (tuple[0] === key) {
+    for (let index = 0; index < tuples.length; index++) {
+      const tuple = tuples.get(index)
+
+      if (tuple && tuple[0] === key) {
         return tuple[1]
       }
     }
@@ -35,11 +37,11 @@ export class HashTable<V> {
 
   put(key: string, value: V): void {
     const index = this.getArrayIndex(key)
-    let tuples = this.keys[index]
+    let tuples = this.entries[index]
     if (!tuples) {
       const linkedList = new DoublyLinkedList<[string, V]>()
 
-      this.keys[index] = linkedList
+      this.entries[index] = linkedList
       tuples = linkedList
     }
 
