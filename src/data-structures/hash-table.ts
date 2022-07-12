@@ -15,15 +15,41 @@ export class HashTable<V> {
   private keys: DoublyLinkedList<[string, V]>[] = []
 
   get(key: string): V | undefined {
+    const index = this.getArrayIndex(key)
+    const tuples = this.keys[index]
+
+    if (!tuples) return undefined
+
+    for (const tuple of tuples) {
+      if (tuple[0] === key) {
+        return tuple[1]
+      }
+    }
+
     return undefined
   }
 
   contains(key: string): boolean {
-    return false
+    return !!this.get(key)
   }
 
   put(key: string, value: V): void {
-    return
+    const index = this.getArrayIndex(key)
+    let tuples = this.keys[index]
+    if (!tuples) {
+      const linkedList = new DoublyLinkedList<[string, V]>()
+
+      this.keys[index] = linkedList
+      tuples = linkedList
+    }
+
+    tuples.addFirst([key, value])
+  }
+
+  private getArrayIndex(key: string): number {
+    const hash = this.hashCode(key)
+    const index = Math.abs(hash) % 10000
+    return index
   }
 
   private hashCode(key: string): number {
