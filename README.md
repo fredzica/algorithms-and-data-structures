@@ -65,6 +65,11 @@ A binary tree is full when all its nodes have zero or two children.
 
 A binary tree is perfect when it's both complete and full.
 
+##### Trie
+
+The Trie is normally used to store words. It enables easy checks for words with a prefix or the existence of words.
+Its nodes can have any number of children, and its paths represent words.
+
 #### Traversals
 
 There are 3 orders for traversing a binary tree:
@@ -72,5 +77,10 @@ There are 3 orders for traversing a binary tree:
 - in order: left nodes, current node, right nodes
 - pre order: current node, left nodes, right nodes
 - post order: left nodes, right nodes, current node
+
+## Hash Table
+
+The Hash Table enables mapping keys to values. Its biggest advantage is constant-time complexity for retrieving a value of a key. It works by keeping an array and mapping each new key to a value in that array, via a hash code function. Accessing the array by its index makes the constant-time search possible.
+Its drawbacks are memory storage for keeping the entire array and possible collisions when storing the keys and values. If the collisions are too frequent, its runtime complexity becomes O(n). But, for the general use case, good hash table implementations are very useful and don't result in unintended behavior.
 
 # Algorithms
