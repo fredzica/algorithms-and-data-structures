@@ -7,10 +7,10 @@ class MinHeap<T> {
     return this._root
   }
 
-  insert(node: BinaryTreeNode<T>): void {}
+  insert(node: T): void {}
 
-  extractMinimum(node: BinaryTreeNode<T>): T {
-    return node.element
+  extractMinimum(): T | undefined {
+    return this._root?.element
   }
 }
 

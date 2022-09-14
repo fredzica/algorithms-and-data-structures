@@ -1,4 +1,4 @@
-import { isMinHeap } from '../../src/data-structures/min-heap'
+import { isMinHeap, MinHeap } from '../../src/data-structures/min-heap'
 
 describe('Min Heap tests', () => {
   it('Should check valid Min Heaps', () => {
@@ -38,9 +38,7 @@ describe('Min Heap tests', () => {
         right: { element: 6 },
       }),
     ).toBe(true)
-  })
 
-  it('Should check invalid Min Heaps', () => {
     expect(
       isMinHeap({
         element: 9,
@@ -76,5 +74,53 @@ describe('Min Heap tests', () => {
         },
       }),
     ).toBe(false)
+  })
+
+  it('Should correctly insert', () => {
+    const minHeap = new MinHeap<number>()
+
+    minHeap.insert(5)
+    minHeap.insert(17)
+    minHeap.insert(10)
+    minHeap.insert(84)
+    minHeap.insert(19)
+    expect(minHeap.root?.element).toBe(5)
+
+    minHeap.insert(3)
+    minHeap.insert(6)
+    minHeap.insert(22)
+    minHeap.insert(9)
+
+    expect(minHeap.root?.element).toBe(3)
+
+    if (!minHeap.root) {
+      fail()
+    }
+    expect(isMinHeap(minHeap.root)).toBe(true)
+  })
+
+  it('Should correctly extract minimum', () => {
+    const minHeap = new MinHeap<number>()
+    expect(minHeap.extractMinimum()).toBeUndefined()
+
+    minHeap.insert(5)
+    minHeap.insert(17)
+    minHeap.insert(10)
+    minHeap.insert(84)
+    minHeap.insert(19)
+    minHeap.insert(3)
+    minHeap.insert(6)
+    minHeap.insert(22)
+    minHeap.insert(9)
+
+    expect(minHeap.root?.element).toBe(3)
+    expect(minHeap.extractMinimum()).toBe(3)
+
+    if (!minHeap.root) {
+      fail()
+    }
+    expect(isMinHeap(minHeap.root)).toBe(true)
+
+    expect(minHeap.extractMinimum()).toBe(5)
   })
 })
