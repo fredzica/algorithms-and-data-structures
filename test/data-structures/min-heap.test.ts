@@ -57,6 +57,22 @@ describe('Min Heap tests', () => {
         },
         right: {
           element: 7,
+          left: { element: 5 },
+          right: { element: 8 },
+        },
+      }),
+    ).toBe(false)
+
+    expect(
+      isMinHeap({
+        element: 3,
+        left: {
+          element: 4,
+          left: { element: 5 },
+          right: { element: 6 },
+        },
+        right: {
+          element: 7,
           right: { element: 8 },
         },
       }),
