@@ -16,7 +16,10 @@ const generateConnectedGraph = (
       currentNode.addNeighbor(nodes[i + 1])
     }
     if (nodeCount > 1) {
-      currentNode.addNeighbor(nodes[Math.floor(Math.random() * nodeCount)])
+      const randomIndex = Math.floor(Math.random() * nodeCount)
+      if (randomIndex !== i) {
+        currentNode.addNeighbor(nodes[randomIndex])
+      }
     }
   }
 
@@ -28,10 +31,9 @@ describe('Graph tests', () => {
     const graph = generateConnectedGraph(0)
     const elements: GraphNode<number>[] = []
 
-    const fn = (node: GraphNode<number>) => {
+    graph.depthFirstSearch((node: GraphNode<number>) => {
       elements.push(node)
-    }
-    graph.depthFirstSearch(fn)
+    })
     expect(elements).toHaveLength(0)
     expect(elements).toEqual([])
   })
@@ -40,10 +42,9 @@ describe('Graph tests', () => {
     const graph = generateConnectedGraph(1)
     const elements: number[] = []
 
-    const fn = (node: GraphNode<number>) => {
+    graph.depthFirstSearch((node: GraphNode<number>) => {
       elements.push(node.element)
-    }
-    graph.depthFirstSearch(fn)
+    })
     expect(elements).toHaveLength(1)
     expect(elements).toEqual([0])
   })
@@ -57,17 +58,18 @@ describe('Graph tests', () => {
     })
 
     expect(elements).toHaveLength(graph.size())
-    expect(elements).toEqual(graph.nodes)
+    graph.nodes.forEach((node) => {
+      expect(elements).toContain(node)
+    })
   })
 
   it('should run BFS on graph with size 0', () => {
     const graph = generateConnectedGraph(0)
     const elements: GraphNode<number>[] = []
 
-    const fn = (node: GraphNode<number>) => {
+    graph.breadthFirstSearch((node: GraphNode<number>) => {
       elements.push(node)
-    }
-    graph.breadthFirstSearch(fn)
+    })
     expect(elements).toHaveLength(0)
     expect(elements).toEqual([])
   })
@@ -76,10 +78,9 @@ describe('Graph tests', () => {
     const graph = generateConnectedGraph(1)
     const elements: number[] = []
 
-    const fn = (node: GraphNode<number>) => {
+    graph.breadthFirstSearch((node: GraphNode<number>) => {
       elements.push(node.element)
-    }
-    graph.breadthFirstSearch(fn)
+    })
     expect(elements).toHaveLength(1)
     expect(elements).toEqual([0])
   })
@@ -87,12 +88,14 @@ describe('Graph tests', () => {
   it('should visit every node once with BFS', () => {
     const graph = generateConnectedGraph()
 
-    const elements: number[] = []
+    const elements: GraphNode<number>[] = []
     graph.breadthFirstSearch((node) => {
-      elements.push(node.element)
+      elements.push(node)
     })
 
     expect(elements).toHaveLength(graph.size())
-    expect(elements).toContain(graph.nodes.map((node) => node.element))
+    graph.nodes.forEach((node) => {
+      expect(elements).toContain(node)
+    })
   })
 })
