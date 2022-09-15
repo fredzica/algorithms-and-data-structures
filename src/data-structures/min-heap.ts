@@ -13,7 +13,16 @@ class MinHeap<T> {
   }
 
   insert(element: T): void {
-    return
+    if (this.size == 0) {
+      this.heap[0] = element
+      this.size++
+      return
+    }
+
+    this.heap[this.size] = element
+    this.size++
+
+    this.bubbleUp()
   }
 
   extractMinimum(): T | undefined {
@@ -43,6 +52,24 @@ class MinHeap<T> {
     if (rightIndex < this.size) {
       node.right = { element: this.heap[rightIndex] }
       this.assignToTree(node.right, rightIndex)
+    }
+  }
+
+  private bubbleUp(): void {
+    let index = this.size - 1
+    const element = this.heap[index]
+
+    while (index > 0) {
+      const parentIndex = Math.floor((index - 1) / 2)
+      const parent = this.heap[parentIndex]
+
+      if (element >= parent) {
+        break
+      }
+
+      this.heap[parentIndex] = element
+      this.heap[index] = parent
+      index = parentIndex
     }
   }
 }
