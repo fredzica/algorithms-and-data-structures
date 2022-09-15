@@ -1,12 +1,11 @@
 import { Graph, GraphNode } from '../../src/data-structures/graph'
 
-const generateRandomConnectedGraph = (): Graph<number> => {
+const generateConnectedGraph = (
+  nodeCount = Math.random() * (100 - 2) + 2,
+): Graph<number> => {
   const nodes: Array<GraphNode<number>> = []
-  const nodeCount = Math.random() * 100
 
-  const firstNode = new GraphNode(0)
-  nodes.push(firstNode)
-  for (let i = 1; i < nodeCount; i++) {
+  for (let i = 0; i < nodeCount; i++) {
     const node = new GraphNode(i)
     nodes.push(node)
   }
@@ -16,16 +15,41 @@ const generateRandomConnectedGraph = (): Graph<number> => {
     if (i + 1 < nodes.length) {
       currentNode.addNeighbor(nodes[i + 1])
     }
-    currentNode.addNeighbor(nodes[Math.floor(Math.random() * nodeCount)])
+    if (nodeCount > 1) {
+      currentNode.addNeighbor(nodes[Math.floor(Math.random() * nodeCount)])
+    }
   }
 
   return new Graph(nodes)
 }
 
 describe('Graph tests', () => {
+  it('should run DFS on graph with size 0', () => {
+    const graph = generateConnectedGraph(0)
+    const elements: GraphNode<number>[] = []
+
+    const fn = (node: GraphNode<number>) => {
+      elements.push(node)
+    }
+    graph.depthFirstSearch(fn)
+    expect(elements).toHaveLength(0)
+    expect(elements).toEqual([])
+  })
+
+  it('should run DFS on graph with size 1', () => {
+    const graph = generateConnectedGraph(1)
+    const elements: number[] = []
+
+    const fn = (node: GraphNode<number>) => {
+      elements.push(node.element)
+    }
+    graph.depthFirstSearch(fn)
+    expect(elements).toHaveLength(1)
+    expect(elements).toEqual([0])
+  })
+
   it('should visit every node once with DFS', () => {
-    // TODO: test 0 and 1 element graphs
-    const graph = generateRandomConnectedGraph()
+    const graph = generateConnectedGraph()
 
     const elements: typeof graph.nodes = []
     graph.depthFirstSearch((node) => {
@@ -36,8 +60,32 @@ describe('Graph tests', () => {
     expect(elements).toEqual(graph.nodes)
   })
 
+  it('should run BFS on graph with size 0', () => {
+    const graph = generateConnectedGraph(0)
+    const elements: GraphNode<number>[] = []
+
+    const fn = (node: GraphNode<number>) => {
+      elements.push(node)
+    }
+    graph.breadthFirstSearch(fn)
+    expect(elements).toHaveLength(0)
+    expect(elements).toEqual([])
+  })
+
+  it('should run BFS on graph with size 1', () => {
+    const graph = generateConnectedGraph(1)
+    const elements: number[] = []
+
+    const fn = (node: GraphNode<number>) => {
+      elements.push(node.element)
+    }
+    graph.breadthFirstSearch(fn)
+    expect(elements).toHaveLength(1)
+    expect(elements).toEqual([0])
+  })
+
   it('should visit every node once with BFS', () => {
-    const graph = generateRandomConnectedGraph()
+    const graph = generateConnectedGraph()
 
     const elements: number[] = []
     graph.breadthFirstSearch((node) => {
