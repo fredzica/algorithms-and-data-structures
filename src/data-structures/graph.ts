@@ -14,6 +14,18 @@ class Graph<T> {
   constructor(nodes: GraphNode<T>[] = []) {
     this.nodes = nodes
   }
+
+  length(): number {
+    return this.nodes.length
+  }
+
+  breadthFirstSearch(visitFn: (node: GraphNode<T>) => void): void {
+    return
+  }
+
+  depthFirstSearch(visitFn: (node: GraphNode<T>) => void): void {
+    return
+  }
 }
 
 export { Graph, GraphNode }
