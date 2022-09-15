@@ -8,6 +8,11 @@ const generateRandomGraph = (): Graph<number> => {
     nodes.push(new GraphNode(i, nodes[i - 1] ? [nodes[i - 1]] : []))
   }
 
+  for (let i = 0; i < nodeCount; i++) {
+    const currentNode = nodes[i]
+    currentNode.addNeighbor(nodes[Math.floor(Math.random() * nodeCount)])
+  }
+
   return new Graph(nodes)
 }
 
@@ -21,7 +26,7 @@ describe('Graph tests', () => {
       elements.push(node.element)
     })
 
-    expect(elements).toHaveLength(graph.length())
+    expect(elements).toHaveLength(graph.size())
     expect(elements).toContain(graph.nodes)
   }
 

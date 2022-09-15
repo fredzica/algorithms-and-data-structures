@@ -6,6 +6,10 @@ class GraphNode<T> {
     this.element = element
     this.neighbors = neighbors
   }
+
+  addNeighbor(node: GraphNode<T>) {
+    this.neighbors.push(node)
+  }
 }
 
 class Graph<T> {
@@ -15,7 +19,7 @@ class Graph<T> {
     this.nodes = nodes
   }
 
-  length(): number {
+  size(): number {
     return this.nodes.length
   }
 
