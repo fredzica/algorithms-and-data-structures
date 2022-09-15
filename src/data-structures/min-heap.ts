@@ -1,16 +1,49 @@
 import { BinaryTreeNode, isCompleteTree } from './tree'
 
 class MinHeap<T> {
-  private _root?: BinaryTreeNode<T>
+  private heap: T[]
+  private size = 0
 
-  public get root(): BinaryTreeNode<T> | undefined {
-    return this._root
+  constructor(capacity: number) {
+    this.heap = new Array(capacity)
   }
 
-  insert(node: T): void {}
+  min(): T | undefined {
+    return this.heap[0]
+  }
+
+  insert(element: T): void {
+    return
+  }
 
   extractMinimum(): T | undefined {
-    return this._root?.element
+    return this.heap[0]
+  }
+
+  toTreeRoot(): BinaryTreeNode<T> | undefined {
+    if (this.size == 0) {
+      return undefined
+    }
+
+    const root = { element: this.heap[0] }
+    this.assignToTree(root, 0)
+
+    return root
+  }
+
+  private assignToTree(node: BinaryTreeNode<T>, index: number): void {
+    const leftIndex = index * 2 + 1
+    const rightIndex = index * 2 + 2
+
+    if (leftIndex < this.size) {
+      node.left = { element: this.heap[leftIndex] }
+      this.assignToTree(node.left, leftIndex)
+    }
+
+    if (rightIndex < this.size) {
+      node.right = { element: this.heap[rightIndex] }
+      this.assignToTree(node.right, rightIndex)
+    }
   }
 }
 
@@ -30,7 +63,11 @@ const checkMinHeap = <T>(node: BinaryTreeNode<T>): boolean => {
   return true
 }
 
-const isMinHeap = <T>(node: BinaryTreeNode<T>): boolean => {
+const isMinHeap = <T>(node: BinaryTreeNode<T> | undefined): boolean => {
+  if (node == undefined) {
+    return true
+  }
+
   const isComplete = isCompleteTree(node)
   if (!isComplete) {
     return false

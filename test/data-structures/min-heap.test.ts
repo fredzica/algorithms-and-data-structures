@@ -93,30 +93,31 @@ describe('Min Heap tests', () => {
   })
 
   it('Should correctly insert', () => {
-    const minHeap = new MinHeap<number>()
+    const minHeap = new MinHeap<number>(10)
 
     minHeap.insert(5)
     minHeap.insert(17)
     minHeap.insert(10)
     minHeap.insert(84)
     minHeap.insert(19)
-    expect(minHeap.root?.element).toBe(5)
+    expect(minHeap.min()).toBe(5)
 
     minHeap.insert(3)
     minHeap.insert(6)
     minHeap.insert(22)
     minHeap.insert(9)
 
-    expect(minHeap.root?.element).toBe(3)
+    expect(minHeap.min()).toBe(3)
 
-    if (!minHeap.root) {
+    const treeRoot = minHeap.toTreeRoot()
+    if (!treeRoot) {
       fail()
     }
-    expect(isMinHeap(minHeap.root)).toBe(true)
+    expect(isMinHeap(treeRoot)).toBe(true)
   })
 
   it('Should correctly extract minimum', () => {
-    const minHeap = new MinHeap<number>()
+    const minHeap = new MinHeap<number>(10)
     expect(minHeap.extractMinimum()).toBeUndefined()
 
     minHeap.insert(5)
@@ -129,13 +130,11 @@ describe('Min Heap tests', () => {
     minHeap.insert(22)
     minHeap.insert(9)
 
-    expect(minHeap.root?.element).toBe(3)
+    expect(minHeap.min()).toBe(3)
     expect(minHeap.extractMinimum()).toBe(3)
 
-    if (!minHeap.root) {
-      fail()
-    }
-    expect(isMinHeap(minHeap.root)).toBe(true)
+    const treeRoot = minHeap.toTreeRoot()
+    expect(isMinHeap(treeRoot)).toBe(true)
 
     expect(minHeap.extractMinimum()).toBe(5)
   })
