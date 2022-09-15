@@ -20,7 +20,7 @@ class MinHeap<T> {
   }
 
   extractMinimum(): T | undefined {
-    if (this.size == 0) {
+    if (this.size === 0) {
       return undefined
     }
 
@@ -34,7 +34,7 @@ class MinHeap<T> {
   }
 
   toTreeRepresentation(): BinaryTreeNode<T> | undefined {
-    if (this.size == 0) {
+    if (this.size === 0) {
       return undefined
     }
 
@@ -97,6 +97,10 @@ class MinHeap<T> {
       const leftChildIndex = this.getLeftChildIndex(index)
       const rightChildIndex = this.getRightChildIndex(index)
 
+      if (leftChildIndex > this.size) {
+        break
+      }
+
       if (this.heap[leftChildIndex] < this.heap[rightChildIndex]) {
         this.heap[index] = this.heap[leftChildIndex]
         this.heap[leftChildIndex] = element
@@ -127,7 +131,7 @@ const checkMinHeap = <T>(node: BinaryTreeNode<T>): boolean => {
 }
 
 const isMinHeap = <T>(node: BinaryTreeNode<T> | undefined): boolean => {
-  if (node == undefined) {
+  if (node === undefined) {
     return true
   }
 
