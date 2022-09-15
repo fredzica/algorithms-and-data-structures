@@ -109,7 +109,7 @@ describe('Min Heap tests', () => {
 
     expect(minHeap.min()).toBe(3)
 
-    const treeRoot = minHeap.toTreeRoot()
+    const treeRoot = minHeap.toTreeRepresentation()
     if (!treeRoot) {
       fail()
     }
@@ -133,9 +133,11 @@ describe('Min Heap tests', () => {
     expect(minHeap.min()).toBe(3)
     expect(minHeap.extractMinimum()).toBe(3)
 
-    const treeRoot = minHeap.toTreeRoot()
+    let treeRoot = minHeap.toTreeRepresentation()
     expect(isMinHeap(treeRoot)).toBe(true)
 
     expect(minHeap.extractMinimum()).toBe(5)
+    treeRoot = minHeap.toTreeRepresentation()
+    expect(isMinHeap(treeRoot)).toBe(true)
   })
 })
