@@ -2,6 +2,8 @@ import { isMinHeap, MinHeap } from '../../src/data-structures/min-heap'
 
 describe('Min Heap tests', () => {
   it('Should check valid Min Heaps', () => {
+    expect(isMinHeap(undefined)).toBe(true)
+
     expect(
       isMinHeap({
         element: 5,
@@ -92,7 +94,29 @@ describe('Min Heap tests', () => {
     ).toBe(false)
   })
 
-  it('Should correctly insert', () => {
+  it('Should convert to tree representation', () => {
+    const minHeap = new MinHeap<number>(10)
+    expect(minHeap.toTreeRepresentation()).toBeUndefined()
+
+    minHeap.insert(5)
+    expect(minHeap.toTreeRepresentation()).toEqual({ element: 5 })
+
+    minHeap.insert(3)
+    minHeap.insert(16)
+    minHeap.insert(2)
+    minHeap.insert(400)
+    expect(minHeap.toTreeRepresentation()).toEqual({
+      element: 2,
+      left: {
+        element: 3,
+        left: { element: 5 },
+        right: { element: 400 },
+      },
+      right: { element: 16 },
+    })
+  })
+
+  it('Should insert', () => {
     const minHeap = new MinHeap<number>(10)
 
     minHeap.insert(5)
@@ -110,9 +134,6 @@ describe('Min Heap tests', () => {
     expect(minHeap.min()).toBe(3)
 
     const treeRoot = minHeap.toTreeRepresentation()
-    if (!treeRoot) {
-      fail()
-    }
     expect(isMinHeap(treeRoot)).toBe(true)
   })
 
