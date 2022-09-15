@@ -13,12 +13,6 @@ class MinHeap<T> {
   }
 
   insert(element: T): void {
-    if (this.size == 0) {
-      this.heap[0] = element
-      this.size++
-      return
-    }
-
     this.heap[this.size] = element
     this.size++
 
@@ -26,6 +20,10 @@ class MinHeap<T> {
   }
 
   extractMinimum(): T | undefined {
+    if (this.size == 0) {
+      return undefined
+    }
+
     const min = this.heap[0]
     this.heap[0] = this.heap[this.size - 1]
     this.size--
@@ -46,9 +44,21 @@ class MinHeap<T> {
     return root
   }
 
+  private getLeftChildIndex(index: number): number {
+    return 2 * index + 1
+  }
+
+  private getRightChildIndex(index: number): number {
+    return 2 * index + 2
+  }
+
+  private getParentIndex(index: number): number {
+    return Math.floor((index - 1) / 2)
+  }
+
   private assignToTree(node: BinaryTreeNode<T>, index: number): void {
-    const leftIndex = index * 2 + 1
-    const rightIndex = index * 2 + 2
+    const leftIndex = this.getLeftChildIndex(index)
+    const rightIndex = this.getRightChildIndex(index)
 
     if (leftIndex < this.size) {
       node.left = { element: this.heap[leftIndex] }
@@ -66,7 +76,7 @@ class MinHeap<T> {
     const element = this.heap[index]
 
     while (index > 0) {
-      const parentIndex = Math.floor((index - 1) / 2)
+      const parentIndex = this.getParentIndex(index)
       const parent = this.heap[parentIndex]
 
       if (element >= parent) {
@@ -79,7 +89,25 @@ class MinHeap<T> {
     }
   }
 
-  private bubbleDown(): void {}
+  private bubbleDown(): void {
+    let index = 0
+    const element = this.heap[index]
+
+    while (index < this.size) {
+      const leftChildIndex = this.getLeftChildIndex(index)
+      const rightChildIndex = this.getRightChildIndex(index)
+
+      if (this.heap[leftChildIndex] < this.heap[rightChildIndex]) {
+        this.heap[index] = this.heap[leftChildIndex]
+        this.heap[leftChildIndex] = element
+        index = leftChildIndex
+      } else {
+        this.heap[index] = this.heap[rightChildIndex]
+        this.heap[rightChildIndex] = element
+        index = rightChildIndex
+      }
+    }
+  }
 }
 
 const checkMinHeap = <T>(node: BinaryTreeNode<T>): boolean => {

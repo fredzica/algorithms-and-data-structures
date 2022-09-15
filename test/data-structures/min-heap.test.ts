@@ -117,7 +117,7 @@ describe('Min Heap tests', () => {
   })
 
   it('Should correctly extract minimum', () => {
-    const minHeap = new MinHeap<number>(10)
+    const minHeap = new MinHeap<number>(20)
     expect(minHeap.extractMinimum()).toBeUndefined()
 
     minHeap.insert(5)
@@ -132,10 +132,10 @@ describe('Min Heap tests', () => {
 
     expect(minHeap.min()).toBe(3)
     expect(minHeap.extractMinimum()).toBe(3)
-
     let treeRoot = minHeap.toTreeRepresentation()
     expect(isMinHeap(treeRoot)).toBe(true)
 
+    expect(minHeap.min()).toBe(5)
     expect(minHeap.extractMinimum()).toBe(5)
     treeRoot = minHeap.toTreeRepresentation()
     expect(isMinHeap(treeRoot)).toBe(true)
