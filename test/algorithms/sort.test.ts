@@ -8,8 +8,12 @@ import {
 describe('Sort algorithms', () => {
   it('should sort arrays of numbers', () => {
     const testSort = <T>(array: T[], expected: T[]) => {
-      ;[insertionSort, selectionSort, mergeSort, quickSort].forEach((sortFn) =>
-        expect(sortFn(array)).toEqual(expected),
+      ;[insertionSort, selectionSort, mergeSort, quickSort].forEach(
+        (sortFn) => {
+          console.log('testing ', sortFn.name, array)
+          const arrayCopy = Array.from(array)
+          expect(sortFn(arrayCopy)).toEqual(expected)
+        },
       )
     }
 

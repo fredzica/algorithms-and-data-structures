@@ -4,6 +4,18 @@
  * @returns The sorted array
  */
 const insertionSort = <T>(array: T[]): T[] => {
+  for (let i = 1; i < array.length; i++) {
+    for (let j = i - 1; j >= 0; j--) {
+      const e2 = array[j + 1]
+      const e1 = array[j]
+
+      if (e2 < e1) {
+        array[j + 1] = e1
+        array[j] = e2
+      }
+    }
+  }
+
   return array
 }
 
