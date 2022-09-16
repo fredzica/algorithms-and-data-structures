@@ -93,3 +93,13 @@ A graph is a collection of nodes that can be connected to each other. The connec
 Trees are graphs, but not all graphs are trees. Cycles can exist in graphs.
 
 # Algorithms
+
+## Sorting
+
+### Insertion sort
+
+Insertion sort is a simple sorting algorithm that works by going through each item and inserting it in a subset of the array that is sorted.
+
+### Selection sort
+
+Selection sort is a simple sorting algorithm that goes through each item, selects the smallest value in the unsorted part of the array and swaps it with the current item.
