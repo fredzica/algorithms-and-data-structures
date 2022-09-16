@@ -10,6 +10,7 @@ describe('Sort algorithms', () => {
     const testSort = <T>(array: T[], expected: T[]) => {
       ;[insertionSort, selectionSort, mergeSort, quickSort].forEach(
         (sortFn) => {
+          // eslint-disable-next-line no-console
           console.log('testing ', sortFn.name, array)
           const arrayCopy = Array.from(array)
           expect(sortFn(arrayCopy)).toEqual(expected)

@@ -25,6 +25,21 @@ const insertionSort = <T>(array: T[]): T[] => {
  * @returns The sorted array
  */
 const selectionSort = <T>(array: T[]): T[] => {
+  for (let i = 0; i < array.length; i++) {
+    let smaller = array[i]
+    let swapIndex = i
+    for (let j = i + 1; j < array.length; j++) {
+      const element = array[j]
+      if (smaller > element) {
+        smaller = element
+        swapIndex = j
+      }
+    }
+
+    array[swapIndex] = array[i]
+    array[i] = smaller
+  }
+
   return array
 }
 
