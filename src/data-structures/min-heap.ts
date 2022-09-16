@@ -1,5 +1,9 @@
 import { BinaryTreeNode, isCompleteTree } from './tree'
 
+/**
+ * MinHeap is a complete binary tree where the value of each node
+ * is less than or equal to the value of its parent.
+ */
 class MinHeap<T> {
   private heap: T[]
   private size = 0
@@ -8,10 +12,22 @@ class MinHeap<T> {
     this.heap = new Array(capacity)
   }
 
+  /**
+   * Retrieves the minimum value in the heap.
+   * The runtime complexity is O(1).
+   * The space complexity is O(1).
+   * @returns The minimum value in the heap.
+   */
   min(): T | undefined {
     return this.heap[0]
   }
 
+  /**
+   * Adds an element to the heap.
+   * The runtime complexity is O(logn).
+   * The space complexity is O(1).
+   * @param element The element to add to the heap.
+   */
   insert(element: T): void {
     this.heap[this.size] = element
     this.size++
@@ -19,6 +35,12 @@ class MinHeap<T> {
     this.bubbleUp()
   }
 
+  /**
+   * Removes the minimum value from the heap.
+   * The runtime complexity is O(logn).
+   * The space complexity is O(1).
+   * @returns The removed minimum value from the heap.
+   */
   extractMinimum(): T | undefined {
     if (this.size === 0) {
       return undefined
@@ -33,13 +55,17 @@ class MinHeap<T> {
     return min
   }
 
+  /**
+   * Creates a binary tree representation of the heap.
+   * @returns A binary tree representation of the heap.
+   */
   toTreeRepresentation(): BinaryTreeNode<T> | undefined {
     if (this.size === 0) {
       return undefined
     }
 
     const root = { element: this.heap[0] }
-    this.assignToTree(root, 0)
+    this.createTree(root, 0)
 
     return root
   }
@@ -56,18 +82,18 @@ class MinHeap<T> {
     return Math.floor((index - 1) / 2)
   }
 
-  private assignToTree(node: BinaryTreeNode<T>, index: number): void {
+  private createTree(node: BinaryTreeNode<T>, index: number): void {
     const leftIndex = this.getLeftChildIndex(index)
     const rightIndex = this.getRightChildIndex(index)
 
     if (leftIndex < this.size) {
       node.left = { element: this.heap[leftIndex] }
-      this.assignToTree(node.left, leftIndex)
+      this.createTree(node.left, leftIndex)
     }
 
     if (rightIndex < this.size) {
       node.right = { element: this.heap[rightIndex] }
-      this.assignToTree(node.right, rightIndex)
+      this.createTree(node.right, rightIndex)
     }
   }
 
@@ -114,14 +140,14 @@ class MinHeap<T> {
   }
 }
 
-const checkMinHeap = <T>(node: BinaryTreeNode<T>): boolean => {
+const isMinHeapRecursive = <T>(node: BinaryTreeNode<T>): boolean => {
   for (const child of [node.left, node.right]) {
     if (child) {
       if (node.element > child.element) {
         return false
       }
 
-      if (!checkMinHeap(child)) {
+      if (!isMinHeapRecursive(child)) {
         return false
       }
     }
@@ -130,6 +156,12 @@ const checkMinHeap = <T>(node: BinaryTreeNode<T>): boolean => {
   return true
 }
 
+/**
+ * Checks if a binary tree respects the a min heap.
+ * The runtime complexity is O(n).
+ * The space complexity is O(1).
+ * @param node The root node of the binary tree.
+ */
 const isMinHeap = <T>(node: BinaryTreeNode<T> | undefined): boolean => {
   if (node === undefined) {
     return true
@@ -140,7 +172,7 @@ const isMinHeap = <T>(node: BinaryTreeNode<T> | undefined): boolean => {
     return false
   }
 
-  return checkMinHeap(node)
+  return isMinHeapRecursive(node)
 }
 
 export { MinHeap, isMinHeap }
