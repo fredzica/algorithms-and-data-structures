@@ -1,14 +1,9 @@
 import { LinkedListQueue } from './queue'
 
 class GraphNode<T> {
-  element: T
   visited = false
-  neighbors: GraphNode<T>[]
 
-  constructor(element: T, neighbors: GraphNode<T>[] = []) {
-    this.element = element
-    this.neighbors = neighbors
-  }
+  constructor(public element: T, public neighbors: GraphNode<T>[] = []) {}
 
   addNeighbor(node: GraphNode<T>) {
     this.neighbors.push(node)
@@ -16,11 +11,7 @@ class GraphNode<T> {
 }
 
 class Graph<T> {
-  nodes: GraphNode<T>[]
-
-  constructor(nodes: GraphNode<T>[] = []) {
-    this.nodes = nodes
-  }
+  constructor(public nodes: GraphNode<T>[] = []) {}
 
   size(): number {
     return this.nodes.length
