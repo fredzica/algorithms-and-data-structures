@@ -70,6 +70,10 @@ A binary tree is perfect when it's both complete and full.
 The Trie is normally used to store words. It enables easy checks for words with a prefix or the existence of words.
 Its nodes can have any number of children, and its paths represent words.
 
+##### Min Heap
+
+A Min Heap is a complete binary tree where the child nodes are greater or equal than the parent node. This makes the root node the smallest node in the tree. It is used for implementing priority queues and in the heapsort algorithm.
+
 #### Traversals
 
 There are 3 orders for traversing a binary tree:
@@ -82,5 +86,10 @@ There are 3 orders for traversing a binary tree:
 
 The Hash Table enables mapping keys to values. Its biggest advantage is constant-time complexity for retrieving a value of a key. It works by keeping an array and mapping each new key to a value in that array, via a hash code function. Accessing the array by its index makes the constant-time search possible.
 Its drawbacks are memory storage for keeping the entire array and possible collisions when storing the keys and values. If the collisions are too frequent, its runtime complexity becomes O(n). But, for the general use case, good hash table implementations are very useful and don't result in unintended behavior.
+
+## Graph
+
+A graph is a collection of nodes that can be connected to each other. The connections can be either unidirectional or bidirectional.
+Trees are graphs, but not all graphs are trees. Cycles can exist in graphs.
 
 # Algorithms

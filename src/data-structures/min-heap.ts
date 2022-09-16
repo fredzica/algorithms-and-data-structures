@@ -2,7 +2,7 @@ import { BinaryTreeNode, isCompleteTree } from './tree'
 
 /**
  * MinHeap is a complete binary tree where the value of each node
- * is less than or equal to the value of its parent.
+ * is greater than or equal to the value of its parent.
  */
 class MinHeap<T> {
   private heap: T[]
