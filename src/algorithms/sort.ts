@@ -49,7 +49,58 @@ const selectionSort = <T>(array: T[]): T[] => {
  * @returns The sorted array
  */
 const mergeSort = <T>(array: T[]): T[] => {
+  const helper = new Array(array.length)
+  mergeSortHelper(array, helper, 0, array.length - 1)
+
   return array
+}
+
+const mergeSortHelper = <T>(
+  array: T[],
+  helper: T[],
+  low: number,
+  high: number,
+) => {
+  if (low < high) {
+    const middle = Math.floor((low + high) / 2)
+    mergeSortHelper(array, helper, low, middle)
+    mergeSortHelper(array, helper, middle + 1, high)
+    merge(array, helper, low, middle, high)
+  }
+}
+
+const merge = <T>(
+  array: T[],
+  helperArray: T[],
+  low: number,
+  middle: number,
+  high: number,
+) => {
+  for (let i = low; i <= high; i++) {
+    helperArray[i] = array[i]
+  }
+
+  let leftIndex = low
+  let rightIndex = middle + 1
+  let currentIndex = low
+
+  // find out which is the smallest element and put it in the original array
+  while (leftIndex <= middle && rightIndex <= high) {
+    if (helperArray[leftIndex] <= helperArray[rightIndex]) {
+      array[currentIndex] = helperArray[leftIndex]
+      leftIndex++
+    } else {
+      array[currentIndex] = helperArray[rightIndex]
+      rightIndex++
+    }
+    currentIndex++
+  }
+
+  // copy the remaining (if any) left elements into the array
+  const remaining = middle - leftIndex
+  for (let i = 0; i <= remaining; i++) {
+    array[currentIndex + i] = helperArray[leftIndex + i]
+  }
 }
 
 /**
