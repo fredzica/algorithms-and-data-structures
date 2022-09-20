@@ -111,3 +111,9 @@ Merge sort works by recursively halving the array until they have only one eleme
 ### Quicksort
 
 Quicksort works by recursively partitioning the array into 2 parts: the left part is smaller than the pivot, and the right part is greater than the pivot. Then it recursively sorts the left and right parts.
+
+## Searching
+
+### Binary search
+
+The binary search expects an already-sorted array. It will elect a midpoint in the array and evaluate if the value being searched for is greater or lesser than the midpoint. Depending on the result, a new midpoint is elected to the right or to the left of the previous one. This process is repeated until the value is the midpoint or there are no more elements to search.
