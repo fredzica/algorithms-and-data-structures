@@ -109,7 +109,47 @@ const merge = <T>(
  * @returns The sorted array
  */
 const quickSort = <T>(array: T[]): T[] => {
+  quickSortRecursion(array, 0, array.length - 1)
   return array
+}
+
+const quickSortRecursion = <T>(array: T[], left: number, right: number) => {
+  const index = partition(array, left, right)
+
+  if (left < index - 1) {
+    // sort the left half
+    quickSortRecursion(array, left, index - 1)
+  }
+
+  if (right > index) {
+    // sort the right half
+    quickSortRecursion(array, index, right)
+  }
+}
+
+const partition = <T>(array: T[], left: number, right: number) => {
+  const pivotIndex = Math.floor((left + right) / 2)
+  const pivot = array[pivotIndex]
+
+  while (left <= right) {
+    // find indexes of elements that should be at different sides of the pivot
+    while (pivot > array[left]) left++
+    while (pivot < array[right]) right--
+
+    if (left <= right) {
+      swap(array, left, right)
+      left++
+      right--
+    }
+  }
+
+  return left
+}
+
+const swap = <T>(array: T[], i1: number, i2: number) => {
+  const aux = array[i1]
+  array[i1] = array[i2]
+  array[i2] = aux
 }
 
 export { insertionSort, selectionSort, mergeSort, quickSort }
