@@ -103,3 +103,11 @@ Insertion sort is a simple sorting algorithm that works by going through each it
 ### Selection sort
 
 Selection sort is a simple sorting algorithm that goes through each item, selects the smallest value in the unsorted part of the array and swaps it with the current item.
+
+### Mergesort
+
+Merge sort works by recursively halving the array until they have only one element. Then it merges all those halves back in sorted order.
+
+### Quicksort
+
+Quicksort works by recursively partitioning the array into 2 parts: the left part is smaller than the pivot, and the right part is greater than the pivot. Then it recursively sorts the left and right parts.
