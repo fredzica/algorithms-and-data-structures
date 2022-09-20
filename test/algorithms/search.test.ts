@@ -6,8 +6,9 @@ describe('Search algorithms', () => {
   })
 
   it('Should do binary search on an array with a single element', () => {
-    expect(binarySearch([1], 1)).toBe(1)
-    expect(binarySearch([1], 2)).toBe(-1)
+    expect(binarySearch([3], 3)).toBe(3)
+    expect(binarySearch([3], 2)).toBe(-1)
+    expect(binarySearch([3], 5)).toBe(-1)
   })
 
   it('Should do binary search on a long array', () => {
