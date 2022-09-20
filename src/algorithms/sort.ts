@@ -1,5 +1,7 @@
 /**
  * Sorts an array in place with the insertion sort algorithm.
+ * The runtime complexity is O(n²).
+ * The space complexity is O(1).
  * @param array The array to sort
  * @returns The sorted array
  */
@@ -21,6 +23,8 @@ const insertionSort = <T>(array: T[]): T[] => {
 
 /**
  * Sorts an array in place with the selection sort algorithm.
+ * The runtime complexity is O(n²).
+ * The space complexity is O(1).
  * @param array The array to sort
  * @returns The sorted array
  */
@@ -45,6 +49,8 @@ const selectionSort = <T>(array: T[]): T[] => {
 
 /**
  * Sorts an array in place with the mergesort algorithm.
+ * The runtime complexity is O(n log(n)).
+ * The space complexity is O(n) because of the auxiliary array.
  * @param array The array to sort
  * @returns The sorted array
  */
@@ -105,6 +111,8 @@ const merge = <T>(
 
 /**
  * Sorts an array in place with the quicksort algorithm.
+ * The runtime complexity is O(n log(n)) on average and O(n²) in the worst case.
+ * The space complexity is O(log n) (because of the call stack).
  * @param array The array to sort
  * @returns The sorted array
  */
